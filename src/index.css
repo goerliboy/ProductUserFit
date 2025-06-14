@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+@media print {
+  /* Hide non-essential elements when printing */
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Ensure dark mode colors are properly handled in PDF */
+  .dark {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+    background: white;
+  }
+
+  /* Adjust layout for better PDF rendering */
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure proper page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Improve readability in PDF */
+  p, li {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure charts and graphics are visible */
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
