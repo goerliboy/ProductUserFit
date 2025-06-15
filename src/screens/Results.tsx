@@ -249,7 +249,7 @@ const Results: React.FC = () => {
             {showInteractiveSlider ? 'Hide' : 'Explore'} Score Ranges
           </button>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-            Discover how different complexity levels affect product requirements
+            Discover different score analysis and insights for different score ranges.
           </p>
         </div>
 
