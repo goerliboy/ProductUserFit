@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
 import { useTheme } from '../context/ThemeContext';
-import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown, Sliders } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
 import ScoreGauge from '../components/ScoreGauge';
 import RadarChart from '../components/RadarChart';
+import InteractiveScoreSlider from '../components/InteractiveScoreSlider';
 import { parseScoreRangeString, isValidScoreRange, getScoreRangeString } from '../utils/scoreUtils';
 import { supabase, FeedbackEntry } from '../lib/supabase';
 import { questions } from '../data/questions';
@@ -46,6 +47,10 @@ const Results: React.FC = () => {
   // Export state
   const [isExporting, setIsExporting] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
+
+  // Interactive slider state
+  const [showInteractiveSlider, setShowInteractiveSlider] = useState(false);
+  const [sliderScore, setSliderScore] = useState(score);
 
   // Generate sample answers for static pages based on the score
   const generateSampleAnswers = (targetScore: number): Record<number, string> => {
@@ -212,6 +217,10 @@ const Results: React.FC = () => {
     }
   };
 
+  const handleSliderScoreChange = (newScore: number) => {
+    setSliderScore(newScore);
+  };
+
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
@@ -221,6 +230,43 @@ const Results: React.FC = () => {
       </div>
 
       <div className="max-w-4xl w-full space-y-8">
+        {/* Interactive Slider Toggle */}
+        <div className="text-center">
+          <button
+            onClick={() => setShowInteractiveSlider(!showInteractiveSlider)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 text-white font-medium shadow-lg hover:shadow-purple-500/20"
+          >
+            <Sliders size={20} />
+            {showInteractiveSlider ? 'Hide' : 'Explore'} Score Ranges
+          </button>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            Discover how different complexity levels affect product requirements
+          </p>
+        </div>
+
+        {/* Interactive Score Slider */}
+        {showInteractiveSlider && (
+          <div className="border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-xl p-6">
+            <InteractiveScoreSlider 
+              initialScore={score} 
+              onScoreChange={handleSliderScoreChange}
+            />
+          </div>
+        )}
+
+        {/* Current Analysis Results */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
+          <h2 className="text-xl font-bold mb-2 text-indigo-900 dark:text-indigo-100">
+            {isStaticPage ? `Sample Analysis for Score Range ${currentScoreRange}` : 'Your Product Analysis'}
+          </h2>
+          <p className="text-indigo-700 dark:text-indigo-200">
+            {isStaticPage 
+              ? `This shows what a typical product scoring ${currentScoreRange} would look like. Use the interactive slider above to explore other ranges.`
+              : 'Based on your questionnaire responses, here\'s your detailed analysis.'
+            }
+          </p>
+        </div>
+
         {/* Score and Interpretation Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
