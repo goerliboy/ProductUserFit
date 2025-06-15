@@ -23,12 +23,19 @@ const Results: React.FC = () => {
   const isStaticPage = !!scoreRange;
   const scoreFromUrl = isStaticPage && scoreRange ? parseScoreRangeString(scoreRange) : undefined;
   
+  // Interactive slider state
+  const [showInteractiveSlider, setShowInteractiveSlider] = useState(false);
+  const [sliderScore, setSliderScore] = useState(scoreFromUrl || calculateScore());
+
+  // Use slider score when interactive slider is active, otherwise use original score
+  const effectiveScore = showInteractiveSlider ? sliderScore : (scoreFromUrl !== undefined ? scoreFromUrl : calculateScore());
+  
   const { 
-    score, 
+    score: originalScore, 
     interpretation, 
     idealUserProfile,
     recommendations 
-  } = useAnalyzerResults(scoreFromUrl);
+  } = useAnalyzerResults(effectiveScore);
 
   // Refs for PDF export - Only visual elements that should be captured as images
   const scoreRef = useRef<HTMLDivElement>(null);
@@ -48,21 +55,21 @@ const Results: React.FC = () => {
   const [isExporting, setIsExporting] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
 
-  // Interactive slider state
-  const [showInteractiveSlider, setShowInteractiveSlider] = useState(false);
-  const [sliderScore, setSliderScore] = useState(score);
-
   // Generate sample answers for static pages based on the score
   const generateSampleAnswers = (targetScore: number): Record<number, string> => {
     const sampleAnswers: Record<number, string> = {};
     
     questions.forEach((question, index) => {
-      // Find the option that gets us closest to the target score
+      // Add some variation around the target score for more realistic radar chart
+      const variation = (Math.random() - 0.5) * 2; // -1 to +1 variation
+      const adjustedTarget = Math.max(1, Math.min(10, targetScore + variation));
+      
+      // Find the option that gets us closest to the adjusted target score
       let bestOption = question.options[0];
-      let bestDiff = Math.abs(question.options[0].weight - targetScore);
+      let bestDiff = Math.abs(question.options[0].weight - adjustedTarget);
       
       question.options.forEach(option => {
-        const diff = Math.abs(option.weight - targetScore);
+        const diff = Math.abs(option.weight - adjustedTarget);
         if (diff < bestDiff) {
           bestDiff = diff;
           bestOption = option;
@@ -75,9 +82,9 @@ const Results: React.FC = () => {
     return sampleAnswers;
   };
 
-  // Use actual answers if available, otherwise generate sample answers for static pages
+  // Use actual answers if available, otherwise generate sample answers based on effective score
   const displayAnswers = isStaticPage && Object.keys(answers).length === 0 
-    ? generateSampleAnswers(score) 
+    ? generateSampleAnswers(effectiveScore) 
     : answers;
 
   useEffect(() => {
@@ -143,9 +150,8 @@ const Results: React.FC = () => {
     navigate('/');
   };
 
-  const currentScoreRange = getScoreRangeString(score);
+  const currentScoreRange = getScoreRangeString(effectiveScore);
 
-  // Export handlers
   const handleExportPDF = async () => {
     setIsExporting(true);
     
@@ -172,7 +178,7 @@ const Results: React.FC = () => {
       ];
       
       const exportData: ExportData = {
-        score,
+        score: effectiveScore,
         scoreRange: currentScoreRange,
         interpretation,
         idealUserProfile,
@@ -199,7 +205,7 @@ const Results: React.FC = () => {
     
     try {
       const exportData: ExportData = {
-        score,
+        score: effectiveScore,
         scoreRange: currentScoreRange,
         interpretation,
         idealUserProfile,
@@ -227,6 +233,9 @@ const Results: React.FC = () => {
         <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
           Score Analysis and Insights
         </h1>
+        <p className="text-lg italic text-indigo-600 dark:text-indigo-300">
+          Product-User Fit Score: {currentScoreRange}
+        </p>
       </div>
 
       <div className="max-w-4xl w-full space-y-8">
@@ -248,7 +257,7 @@ const Results: React.FC = () => {
         {showInteractiveSlider && (
           <div className="border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-xl p-6">
             <InteractiveScoreSlider 
-              initialScore={score} 
+              initialScore={effectiveScore} 
               onScoreChange={handleSliderScoreChange}
             />
           </div>
@@ -258,7 +267,7 @@ const Results: React.FC = () => {
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
             <div className="w-48 h-48 mb-6 md:mb-0 flex-shrink-0">
-              <ScoreGauge score={score} />
+              <ScoreGauge score={effectiveScore} />
             </div>
             <div className="flex-1">
               <p className="text-gray-600 dark:text-gray-200 text-center md:text-left">{interpretation}</p>

@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Sliders as Slider, BarChart3, Info } from 'lucide-react';
-import { useAnalyzerResults } from '../context/AnalyzerContext';
+import React, { useState } from 'react';
+import { Sliders as Slider, Info } from 'lucide-react';
 import { getScoreRangeString } from '../utils/scoreUtils';
-import ScoreGauge from './ScoreGauge';
-import RadarChart from './RadarChart';
-import { questions } from '../data/questions';
 
 interface InteractiveScoreSliderProps {
   initialScore?: number;
@@ -18,37 +14,7 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
   const [selectedScore, setSelectedScore] = useState(initialScore);
   const [isAnimating, setIsAnimating] = useState(false);
   
-  const { interpretation, idealUserProfile, recommendations } = useAnalyzerResults(selectedScore);
   const currentScoreRange = getScoreRangeString(selectedScore);
-
-  // Generate sample answers based on the selected score
-  const generateSampleAnswers = (targetScore: number): Record<number, string> => {
-    const sampleAnswers: Record<number, string> = {};
-    
-    questions.forEach((question, index) => {
-      // Add some variation around the target score for more realistic radar chart
-      const variation = (Math.random() - 0.5) * 2; // -1 to +1 variation
-      const adjustedTarget = Math.max(1, Math.min(10, targetScore + variation));
-      
-      // Find the option that gets us closest to the adjusted target score
-      let bestOption = question.options[0];
-      let bestDiff = Math.abs(question.options[0].weight - adjustedTarget);
-      
-      question.options.forEach(option => {
-        const diff = Math.abs(option.weight - adjustedTarget);
-        if (diff < bestDiff) {
-          bestDiff = diff;
-          bestOption = option;
-        }
-      });
-      
-      sampleAnswers[index] = bestOption.label;
-    });
-    
-    return sampleAnswers;
-  };
-
-  const sampleAnswers = generateSampleAnswers(selectedScore);
 
   const handleScoreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newScore = parseFloat(event.target.value);
@@ -101,7 +67,7 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
   const scoreInfo = getScoreDescription(selectedScore);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
       <div className="text-center">
         <div className="inline-flex items-center gap-3 mb-4">
@@ -111,7 +77,7 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
           <h2 className="text-2xl font-bold text-text-primary dark:text-white">Interactive Score Explorer</h2>
         </div>
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Drag the slider to explore different complexity levels and see how product requirements change across the spectrum
+          Drag the slider to explore different complexity levels. All sections below will update in real-time.
         </p>
       </div>
 
@@ -180,60 +146,10 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
                   Score Range: {currentScoreRange}
                 </p>
                 <p className="text-sm text-purple-700 dark:text-purple-200">
-                  {interpretation}
+                  Use the slider above to see how all analysis sections below change based on different complexity levels.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Visual Analysis */}
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* Score Gauge */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
-          <h3 className="text-lg font-semibold text-center mb-4 text-text-primary dark:text-white">
-            Complexity Score
-          </h3>
-          <div className="w-48 h-48 mx-auto">
-            <ScoreGauge score={selectedScore} />
-          </div>
-        </div>
-
-        {/* Radar Chart */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
-          <h3 className="text-lg font-semibold text-center mb-4 text-text-primary dark:text-white flex items-center justify-center gap-2">
-            <BarChart3 size={20} />
-            Category Breakdown
-          </h3>
-          <div className="w-full max-w-sm mx-auto aspect-square">
-            <RadarChart answers={sampleAnswers} />
-          </div>
-          <p className="text-xs text-center text-gray-500 dark:text-gray-400 mt-2 italic">
-            Sample data for score {selectedScore.toFixed(1)}
-          </p>
-        </div>
-      </div>
-
-      {/* Quick Insights */}
-      <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary dark:text-white">
-          Quick Insights for Score {selectedScore.toFixed(1)}
-        </h3>
-        
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h4 className="font-medium text-purple-600 dark:text-purple-400 mb-2">Target User</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-              {idealUserProfile.experienceLevel}
-            </p>
-          </div>
-          
-          <div>
-            <h4 className="font-medium text-purple-600 dark:text-purple-400 mb-2">Key Focus</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-              {recommendations.marketing.keyAreas[0]}
-            </p>
           </div>
         </div>
       </div>
