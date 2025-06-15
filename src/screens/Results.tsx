@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
-import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, Globe, Twitter, MessageCircle, GraduationCap, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, Globe, Twitter, MessageCircle, GraduationCap, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
 import ScoreGauge from '../components/ScoreGauge';
@@ -10,6 +10,7 @@ import { getSimilarProducts } from '../data/peerProducts';
 import { parseScoreRangeString, isValidScoreRange, getScoreRangeString } from '../utils/scoreUtils';
 import { supabase, FeedbackEntry } from '../lib/supabase';
 import { questions } from '../data/questions';
+import { exportToPdf, exportToCsv, ExportData } from '../utils/exportUtils';
 
 const Results: React.FC = () => {
   const navigate = useNavigate();
@@ -27,12 +28,23 @@ const Results: React.FC = () => {
     recommendations 
   } = useAnalyzerResults(scoreFromUrl);
 
+  // Refs for PDF export
   const scoreRef = useRef<HTMLDivElement>(null);
   const radarRef = useRef<HTMLDivElement>(null);
+  const userProfileRef = useRef<HTMLDivElement>(null);
+  const marketingRef = useRef<HTMLDivElement>(null);
+  const onboardingRef = useRef<HTMLDivElement>(null);
+  const growthRef = useRef<HTMLDivElement>(null);
+  const similarProductsRef = useRef<HTMLDivElement>(null);
 
   // Feedback state
   const [userFeedback, setUserFeedback] = useState<Record<string, 'like' | 'dislike' | null>>({});
   const [userId, setUserId] = useState<string>('');
+
+  // Export state
+  const [isExporting, setIsExporting] = useState(false);
+  const [showExportOptions, setShowExportOptions] = useState(false);
+  const [showAllSectionsForExport, setShowAllSectionsForExport] = useState(false);
 
   // State to control Similar Products section visibility
   const [showSimilarProducts, setShowSimilarProducts] = useState(false);
@@ -132,6 +144,70 @@ const Results: React.FC = () => {
 
   const currentScoreRange = getScoreRangeString(score);
 
+  // Export handlers
+  const handleExportPDF = async () => {
+    setIsExporting(true);
+    setShowAllSectionsForExport(true);
+    setShowSimilarProducts(true);
+    
+    try {
+      // Wait for DOM to update
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      const sectionRefs = [
+        scoreRef,
+        radarRef,
+        userProfileRef,
+        marketingRef,
+        onboardingRef,
+        growthRef,
+        similarProductsRef
+      ];
+      
+      const exportData: ExportData = {
+        score,
+        scoreRange: currentScoreRange,
+        interpretation,
+        idealUserProfile,
+        recommendations,
+        similarProducts
+      };
+      
+      await exportToPdf(sectionRefs, exportData);
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert('Export failed. Please try again.');
+    } finally {
+      setIsExporting(false);
+      setShowAllSectionsForExport(false);
+      setShowSimilarProducts(false);
+      setShowExportOptions(false);
+    }
+  };
+
+  const handleExportCSV = () => {
+    setIsExporting(true);
+    
+    try {
+      const exportData: ExportData = {
+        score,
+        scoreRange: currentScoreRange,
+        interpretation,
+        idealUserProfile,
+        recommendations,
+        similarProducts
+      };
+      
+      exportToCsv(exportData);
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert('Export failed. Please try again.');
+    } finally {
+      setIsExporting(false);
+      setShowExportOptions(false);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
@@ -145,9 +221,9 @@ const Results: React.FC = () => {
 
       <div className="max-w-4xl w-full space-y-8">
         {/* Score and Interpretation Section */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
-            <div className="w-48 h-48 mb-6 md:mb-0 flex-shrink-0" ref={scoreRef}>
+            <div className="w-48 h-48 mb-6 md:mb-0 flex-shrink-0">
               <ScoreGauge score={score} />
             </div>
             <div className="flex-1">
@@ -157,7 +233,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Radar Chart Section - Now always visible */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50" ref={radarRef}>
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30">
@@ -181,7 +257,7 @@ const Results: React.FC = () => {
             
             {/* Chart container */}
             <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-inner">
-              <div className="w-full max-w-2xl mx-auto aspect-square" ref={radarRef}>
+              <div className="w-full max-w-2xl mx-auto aspect-square">
                 <RadarChart answers={displayAnswers} />
               </div>
             </div>
@@ -199,7 +275,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Ideal User Profile Section */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={userProfileRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
             Ideal User Profile
@@ -226,7 +302,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Marketing Strategy Section */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={marketingRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <MessageSquare size={20} className="text-indigo-500 dark:text-indigo-400" />
             Marketing Strategy
@@ -356,7 +432,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Onboarding Principles Section */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={onboardingRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <Shield size={20} className="text-indigo-500 dark:text-indigo-400" />
             Onboarding Principles
@@ -403,7 +479,7 @@ const Results: React.FC = () => {
                             }`}
                             title="This is helpful"
                           >
-                            <ThumbsUp size={14} />
+                            <ThumbsUp size={16} />
                           </button>
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'dislike', principle)}
@@ -414,7 +490,7 @@ const Results: React.FC = () => {
                             }`}
                             title="This is not helpful"
                           >
-                            <ThumbsDown size={14} />
+                            <ThumbsDown size={16} />
                           </button>
                         </div>
                       </div>
@@ -427,7 +503,7 @@ const Results: React.FC = () => {
         </div>
 
         {/* Growth Tactics Section with Feedback */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={growthRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <TrendingUp size={20} className="text-indigo-500 dark:text-indigo-400" />
             Growth Tactics
@@ -489,9 +565,9 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Similar Products Section - Hidden by default */}
-        {showSimilarProducts && (
-          <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+        {/* Similar Products Section - Show when exporting or when toggled */}
+        {(showSimilarProducts || showAllSectionsForExport) && (
+          <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={similarProductsRef}>
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
               <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
               Similar Products
@@ -561,6 +637,38 @@ const Results: React.FC = () => {
             <Rotate size={18} />
             Start New Analysis
           </button>
+
+          {/* Export Report Button with Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowExportOptions(!showExportOptions)}
+              disabled={isExporting}
+              className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-green-600 hover:bg-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 text-white font-medium"
+            >
+              <Download size={18} />
+              {isExporting ? 'Exporting...' : 'Export Report'}
+              <ChevronDown size={16} className={`transition-transform ${showExportOptions ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {showExportOptions && (
+              <div className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 min-w-[160px] z-10">
+                <button
+                  onClick={handleExportPDF}
+                  disabled={isExporting}
+                  className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-t-lg transition-colors text-gray-700 dark:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Export as PDF
+                </button>
+                <button
+                  onClick={handleExportCSV}
+                  disabled={isExporting}
+                  className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-b-lg transition-colors text-gray-700 dark:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Export as CSV
+                </button>
+              </div>
+            )}
+          </div>
 
           <a
             href="https://x.com/messages/compose?recipient_id=1327720803044093955"
