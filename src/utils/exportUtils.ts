@@ -45,28 +45,10 @@ export const exportToPdf = async (
     const margin = 20;
     const contentWidth = pageWidth - (margin * 2);
     
-    // Add title page
-    pdf.setFontSize(24);
-    pdf.setTextColor(79, 70, 229); // Indigo color
-    pdf.text('Product-User Fit Analysis Report', margin, 40);
+    // Start directly with visual content - no title page
+    let currentY = margin;
     
-    pdf.setFontSize(16);
-    pdf.setTextColor(99, 102, 241); // Lighter indigo
-    pdf.text(`Score Range: ${data.scoreRange}`, margin, 60);
-    
-    pdf.setFontSize(12);
-    pdf.setTextColor(0, 0, 0);
-    const reportDate = new Date().toLocaleDateString();
-    pdf.text(`Generated on: ${reportDate}`, margin, 80);
-    
-    // Start content from the top of the page after title
-    let currentY = 110;
-    
-    // Add new page for visual content
-    pdf.addPage();
-    currentY = margin;
-    
-    // Capture and add each section
+    // Capture and add each visual section
     for (let i = 0; i < sectionRefs.length; i++) {
       const ref = sectionRefs[i];
       if (!ref.current) continue;
