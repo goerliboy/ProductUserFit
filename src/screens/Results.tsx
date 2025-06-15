@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
+import { useTheme } from '../context/ThemeContext';
 import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
@@ -15,6 +16,7 @@ const Results: React.FC = () => {
   const navigate = useNavigate();
   const { scoreRange } = useParams<{ scoreRange: string }>();
   const { resetAnalyzer, answers, totalQuestions, calculateScore } = useAnalyzer();
+  const { theme, toggleTheme } = useTheme();
   
   // Determine if this is a static page (accessed via URL) or dynamic (after questionnaire)
   const isStaticPage = !!scoreRange;
@@ -142,7 +144,19 @@ const Results: React.FC = () => {
   const handleExportPDF = async () => {
     setIsExporting(true);
     
+    // Store the original theme
+    const originalTheme = theme;
+    let themeWasChanged = false;
+    
     try {
+      // Switch to light mode if currently in dark mode
+      if (theme === 'dark') {
+        toggleTheme();
+        themeWasChanged = true;
+        // Wait for theme change to take effect
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+      
       // Wait for DOM to update
       await new Promise(resolve => setTimeout(resolve, 500));
       
@@ -166,6 +180,10 @@ const Results: React.FC = () => {
       console.error('Export failed:', error);
       alert('Export failed. Please try again.');
     } finally {
+      // Always restore the original theme if it was changed
+      if (themeWasChanged && theme !== originalTheme) {
+        toggleTheme();
+      }
       setIsExporting(false);
       setShowExportOptions(false);
     }
