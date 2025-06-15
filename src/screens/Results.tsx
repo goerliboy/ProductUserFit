@@ -259,7 +259,7 @@ const Results: React.FC = () => {
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0"></div>
+                            <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
                             <span className="leading-relaxed">{area}</span>
                           </div>
                           
@@ -267,7 +267,7 @@ const Results: React.FC = () => {
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'like', area)}
-                              className={`p-1.5 rounded-lg transition-all duration-200 ${
+                              className={`p-2 rounded-lg transition-all duration-200 ${
                                 currentFeedback === 'like'
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                                   : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
@@ -278,7 +278,7 @@ const Results: React.FC = () => {
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'dislike', area)}
-                              className={`p-1.5 rounded-lg transition-all duration-200 ${
+                              className={`p-2 rounded-lg transition-all duration-200 ${
                                 currentFeedback === 'dislike'
                                   ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
                                   : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
@@ -316,7 +316,7 @@ const Results: React.FC = () => {
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0"></div>
+                            <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
                             <span className="leading-relaxed">{guide}</span>
                           </div>
                           
@@ -324,7 +324,7 @@ const Results: React.FC = () => {
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'like', guide)}
-                              className={`p-1.5 rounded-lg transition-all duration-200 ${
+                              className={`p-2 rounded-lg transition-all duration-200 ${
                                 currentFeedback === 'like'
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                                   : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
@@ -335,7 +335,7 @@ const Results: React.FC = () => {
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'dislike', guide)}
-                              className={`p-1.5 rounded-lg transition-all duration-200 ${
+                              className={`p-2 rounded-lg transition-all duration-200 ${
                                 currentFeedback === 'dislike'
                                   ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
                                   : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
@@ -388,7 +388,7 @@ const Results: React.FC = () => {
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 flex-1">
-                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0"></div>
+                          <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
                           <span className="leading-relaxed">{principle}</span>
                         </div>
                         
@@ -396,7 +396,7 @@ const Results: React.FC = () => {
                         <div className="flex items-center gap-2 flex-shrink-0">
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'like', principle)}
-                            className={`p-1.5 rounded-lg transition-all duration-200 ${
+                            className={`p-2 rounded-lg transition-all duration-200 ${
                               currentFeedback === 'like'
                                 ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                                 : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
@@ -407,7 +407,7 @@ const Results: React.FC = () => {
                           </button>
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'dislike', principle)}
-                            className={`p-1.5 rounded-lg transition-all duration-200 ${
+                            className={`p-2 rounded-lg transition-all duration-200 ${
                               currentFeedback === 'dislike'
                                 ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
                                 : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
