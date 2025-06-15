@@ -34,6 +34,9 @@ const Results: React.FC = () => {
   const [userFeedback, setUserFeedback] = useState<Record<string, 'like' | 'dislike' | null>>({});
   const [userId, setUserId] = useState<string>('');
 
+  // State to control Similar Products section visibility
+  const [showSimilarProducts, setShowSimilarProducts] = useState(false);
+
   const similarProducts = getSimilarProducts(score);
 
   // Generate sample answers for static pages based on the score
@@ -486,55 +489,57 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Similar Products Section */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
-            Similar Products
-          </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {similarProducts.map((product) => (
-              <div key={product.name} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg flex flex-col hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <img 
-                    src={product.logo} 
-                    alt={`${product.name} logo`} 
-                    className="w-8 h-8 rounded-full"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://via.placeholder.com/32x32';
-                    }}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 text-sm">{product.name}</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
+        {/* Similar Products Section - Hidden by default */}
+        {showSimilarProducts && (
+          <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+            <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
+              <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
+              Similar Products
+            </h2>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {similarProducts.map((product) => (
+                <div key={product.name} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg flex flex-col hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <img 
+                      src={product.logo} 
+                      alt={`${product.name} logo`} 
+                      className="w-8 h-8 rounded-full"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'https://via.placeholder.com/32x32';
+                      }}
+                    />
+                    <div>
+                      <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 text-sm">{product.name}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-auto">
+                    <a
+                      href={product.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      <Globe size={12} />
+                      Website
+                    </a>
+                    <a
+                      href={product.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
+                    >
+                      <Twitter size={12} />
+                      Twitter
+                    </a>
                   </div>
                 </div>
-                <div className="flex gap-2 mt-auto">
-                  <a
-                    href={product.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                  >
-                    <Globe size={12} />
-                    Website
-                  </a>
-                  <a
-                    href={product.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                  >
-                    <Twitter size={12} />
-                    Twitter
-                  </a>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -565,7 +570,7 @@ const Results: React.FC = () => {
           >
             <MessageSquareHeart size={18} />
             Send Feedback
-          </a>
+          </button>
         </div>
 
         {/* Footer Credit */}
