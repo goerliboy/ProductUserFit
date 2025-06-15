@@ -15,11 +15,65 @@
     display: none !important;
   }
 
-  /* Ensure dark mode colors are properly handled in PDF */
-  .dark {
-    --tw-text-opacity: 1;
-    color: rgb(17 24 39 / var(--tw-text-opacity));
-    background: white;
+  /* Force light mode for ALL elements in PDF */
+  * {
+    background-color: white !important;
+    color: #111827 !important;
+    border-color: #e5e7eb !important;
+  }
+
+  /* Preserve important visual elements with proper contrast */
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, #6366f1, #8b5cf6) !important;
+    color: white !important;
+  }
+
+  /* Ensure headings are dark and readable */
+  h1, h2, h3, h4, h5, h6 {
+    color: #1f2937 !important;
+    background-color: transparent !important;
+  }
+
+  /* Force indigo colors for branding elements */
+  .text-indigo-600,
+  .text-indigo-500,
+  .text-indigo-400,
+  .text-indigo-300 {
+    color: #4f46e5 !important;
+  }
+
+  /* Ensure bullet points and icons are visible */
+  .w-2.h-2.rounded-full,
+  .w-1\.5.h-1\.5.rounded-full {
+    background-color: #4f46e5 !important;
+  }
+
+  /* Force white backgrounds for cards and sections */
+  .bg-white,
+  .bg-gray-50,
+  .bg-gray-100,
+  .dark\:bg-gray-800\/50,
+  .dark\:bg-gray-700\/30 {
+    background-color: white !important;
+  }
+
+  /* Ensure text is always dark and readable */
+  .text-gray-600,
+  .text-gray-700,
+  .text-gray-800,
+  .text-gray-900,
+  .dark\:text-white,
+  .dark\:text-gray-200,
+  .dark\:text-gray-300 {
+    color: #374151 !important;
+  }
+
+  /* Remove shadows and borders that might cause issues */
+  .shadow-lg,
+  .shadow-md,
+  .backdrop-blur-sm {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: none !important;
   }
 
   /* Adjust layout for better PDF rendering */
@@ -42,34 +96,5 @@
   canvas {
     max-width: 100% !important;
     height: auto !important;
-  }
-
-  /* Force light mode colors for PDF export */
-  * {
-    color: #111827 !important;
-    background-color: white !important;
-    border-color: #e5e7eb !important;
-  }
-
-  /* Preserve gradients and important visual elements */
-  .bg-gradient-to-r {
-    background: linear-gradient(to right, #6366f1, #8b5cf6) !important;
-    color: white !important;
-  }
-
-  /* Ensure proper contrast for headings */
-  h1, h2, h3, h4, h5, h6 {
-    color: #1f2937 !important;
-  }
-
-  /* Maintain indigo colors for important elements */
-  .text-indigo-600,
-  .text-indigo-500 {
-    color: #4f46e5 !important;
-  }
-
-  /* Ensure bullet points are visible */
-  .w-2.h-2.rounded-full {
-    background-color: #4f46e5 !important;
   }
 }

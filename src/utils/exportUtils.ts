@@ -32,7 +32,7 @@ export interface ExportData {
 }
 
 /**
- * Export the results page as a PDF with light mode styling
+ * Export the results page as a PDF with forced light mode styling
  */
 export const exportToPdf = async (
   sectionRefs: React.RefObject<HTMLElement>[],
@@ -71,7 +71,7 @@ export const exportToPdf = async (
     
     let currentY = 125 + (interpretationLines.length * 5) + 20;
     
-    // Capture and add each section with light mode styling
+    // Capture and add each section with forced light mode styling
     for (let i = 0; i < sectionRefs.length; i++) {
       const ref = sectionRefs[i];
       if (!ref.current) continue;
@@ -83,18 +83,49 @@ export const exportToPdf = async (
           currentY = margin;
         }
         
-        // Capture with forced light mode styling
-        const canvas = await toPng(ref.current, {
+        // Create a temporary clone of the element with forced light mode styles
+        const originalElement = ref.current;
+        const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+        
+        // Apply aggressive light mode styling to the clone
+        const applyLightModeStyles = (element: HTMLElement) => {
+          // Force white background and black text
+          element.style.backgroundColor = '#ffffff';
+          element.style.color = '#111827';
+          element.style.borderColor = '#e5e7eb';
+          
+          // Remove any dark mode classes
+          element.classList.remove('dark:bg-gray-800/50', 'dark:bg-gray-700/30', 'dark:text-white', 'dark:text-gray-200', 'dark:border-gray-700');
+          
+          // Add light mode classes
+          element.classList.add('bg-white', 'text-gray-900');
+          
+          // Recursively apply to all children
+          Array.from(element.children).forEach(child => {
+            if (child instanceof HTMLElement) {
+              applyLightModeStyles(child);
+            }
+          });
+        };
+        
+        // Apply light mode styles to the clone
+        applyLightModeStyles(clonedElement);
+        
+        // Temporarily add clone to DOM for capture
+        clonedElement.style.position = 'absolute';
+        clonedElement.style.left = '-9999px';
+        clonedElement.style.top = '0';
+        clonedElement.style.width = originalElement.offsetWidth + 'px';
+        document.body.appendChild(clonedElement);
+        
+        // Capture the clone with light mode styling
+        const canvas = await toPng(clonedElement, {
           quality: 0.95,
           backgroundColor: '#ffffff',
           pixelRatio: 2,
           style: {
-            // Force light mode colors for PDF
-            color: '#111827',
             backgroundColor: '#ffffff',
-            // Override any dark mode styles
-            '--tw-text-opacity': '1',
-            '--tw-bg-opacity': '1'
+            color: '#111827'
           },
           filter: (node) => {
             // Skip feedback buttons and interactive elements in PDF
@@ -105,9 +136,12 @@ export const exportToPdf = async (
           }
         });
         
+        // Remove the clone from DOM
+        document.body.removeChild(clonedElement);
+        
         const imgData = canvas;
         const imgWidth = contentWidth;
-        const imgHeight = (ref.current.offsetHeight * contentWidth) / ref.current.offsetWidth;
+        const imgHeight = (originalElement.offsetHeight * contentWidth) / originalElement.offsetWidth;
         
         // Check if image fits on current page
         if (currentY + imgHeight > pageHeight - margin) {
