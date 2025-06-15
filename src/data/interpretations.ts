@@ -91,7 +91,7 @@ export const getIdealUserProfile = (score: number): {
   } else if (score >= 9.0 && score <= 9.9) {
     return {
       experienceLevel: "They have shipped smart contracts or apps before. They know their way around Solidity, Rust, Cairo, or Move. They've benchmarked rollup performance, written subgraphs, deployed to testnets, and might've participated in grants or bounties on different chains. They aren't core protocol engineers, but they're the critical 5% who build the dapps everyone else uses.",
-      knowledgeBase: "Familiar with node infrastructure, RPC quirks, and cross-chain messaging. They care about dev tooling (e.g., Hardhat, Foundry, Anchor), Devnet uptime, contract verification, and bridging costs. They check GitHub activity before they choose a chain. If your SDK is broken, they'll file a PR, not a support ticket.",
+      knowledgeBase: "Familiar with node infrastructure, RPC quirks, and cross-chain messaging. They care about dev tooling (e.g. Hardhat, Foundry, Anchor), Devnet uptime, contract verification, and bridging costs. They check GitHub activity before they choose a chain. If your SDK is broken, they'll file a PR, not a support ticket.",
       behavior: "They're evaluating which chain to build on this quarter, not next year. They join Devnets, apply for hackathons, and scout for Testnet incentives. They look for projects with fast, composable SDKs, real support, and clarity on what happens after launch. They prefer one good example over 20 docs pages.",
       expectations: "They expect to reach \"Hello World\" in under 10 minutes with zero setup friction. They look for ready-to-use SDK and API examples in TS, Rust, and Python, along with prebuilt configs and scaffolds for fast iteration. Responsive support via Discord, Telegram, or GitHub is essential. Clear communication around Testnet vs. Mainnet, RPC reliability and available incentives build trust."
     };
@@ -137,7 +137,7 @@ export const getRecommendations = (score: number): {
         contentGuide: [
           "Use visuals and relatable stories.",
           "Provide step-by-step \"How it Works\" graphics or videos with zero jargon.",
-          "Showcase real testimonials from first-time users (e.g., \"I bought crypto in 2 clicks!\"). Mimic the tone of fintech content they already consume on TikTok & Youtube.",
+          "Showcase real testimonials from first-time users (e.g. \"I bought crypto in 2 clicks!\"). Mimic the tone of fintech content they already consume on TikTok & Youtube.",
           "Favor familiar terms (use \"account\" over \"wallet\")."
         ]
       },
@@ -223,7 +223,7 @@ export const getRecommendations = (score: number): {
         main: "The onboarding experience should support \"guided freedom.\" Unlike novices, these users don't require mandatory tours and will likely skip them if forced. Instead, design an adaptive onboarding flow:",
         principles: [
           "Allow free exploration post-setup, with contextual tips and tricks triggered at the right moments.",
-          "Offer visible options to skip setup, alongside intuitive access to support (e.g., a persistent Help button or hover-based tooltips).",
+          "Offer visible options to skip setup, alongside intuitive access to support (e.g. a persistent Help button or hover-based tooltips).",
           "Where there's risk, permit action but include subtle, clickable warning icons with explanatory context.",
           "Use interactive hints only when needed. For example, on first use of a complex feature, a tooltip could suggest: \"Having trouble? Check our guide.\"",
           "Provide clear post-action feedback. If a user completes a cross-chain transfer, summarize the result: \"You moved X from Ethereum to Starknet. Gas used: Y ETH. [View on Explorer].\"",
@@ -231,16 +231,16 @@ export const getRecommendations = (score: number): {
         ]
       },
       growthTactics: [
-        "Host themed challenges like \"DeFi Week,\" where users complete daily tasks (e.g., use a new DEX, try lending) via your product. Completing all tasks unlocks a reward, such as an NFT or prize entry.",
+        "Host themed challenges like \"DeFi Week,\" where users complete daily tasks (e.g. use a new DEX, try lending) via your product. Completing all tasks unlocks a reward, such as an NFT or prize entry.",
         "Collaborate with new dapps. If users engage through your interface, both your product and the dapp reward them, encouraging cross-app discovery.",
         "Implement data-driven prompts. For instance, if users have Token X in their account, prompt: \"Token X is now available to stake. Want to earn on it?\"",
-        "Show users their engagement status. Example: \"You've completed 3 of 5 major DeFi actions. 7/10 users are also exploring yield farming. Check it out!\"",
+        "Show users their engagement status. Example: \"You've completed 3 of 5 DeFi milestones. Explore yield farming next.\"",
         "Reward engagement with points for actions like swapping, bridging, or providing liquidity. Let these points unlock features, badges, or access tiers, creating a gamified progression path.",
         "Let users customize their home screen by pinning preferred data or widgets. This fosters a sense of control and ownership.",
         "Highlight anonymized trending wallets or popular strategies to inspire curiosity: \"12,345 users are earning on Protocol X. Join them!\"",
-        "Create intuitive sequences. After funding their wallet, suggest their next step: \"You funded your account. Next, try swapping or staking.\" This helps users unlock the full product experience smoothly.",
+        "Create intuitive sequences. After funding their wallet, suggest next step: \"You funded your account. Next, try swapping or staking.\" This helps users unlock the full product experience smoothly.",
         "Acknowledge achievements with badges or titles. For example, \"Congrats! Claim your badge for exploring 5 unique dapps on Base!\" This reinforces engagement through recognition.",
-        "Connect actions to tangible benefits. For instance, \"You saved $50 this month using [Product]!\" This reinforces behavior and drives further exploration."
+        "Highlight tangible benefits. For instance, \"You saved $50 this month using [Product]!\" This reinforces behavior and drives further exploration."
       ]
     };
   } else if (score >= 4.0 && score <= 4.9) {
@@ -266,19 +266,19 @@ export const getRecommendations = (score: number): {
           "Highlight critical actions early, then step aside.",
           "Make all guided elements optional and easy to dismiss.",
           "Prioritize discoverability over instruction: intuitive menus, self-service tools, and well-organized settings.",
-          "Reinforce key actions with light feedback (e.g., \"Wallet connected\")",
+          "Reinforce key actions with light feedback (e.g. \"Wallet connected\")",
           "Include subtle progress indicators during any setup process, just to confirm forward motion.",
           "After onboarding, consider sending a single, non-generic message with \"power tips\" to maximize product use. They will read it if it's practical and targeted."
         ]
       },
       growthTactics: [
         "Ship features fast to have the first-mover advantage and piggyback on the hype. When a highly-anticipated chain launches, integrate quickly to ride the wave of its momentum.",
-        "Create a leaderboard showcasing user wins (e.g., \"0xABC saved $320 this month using [Feature]\".)",
-        "Design a referral system that rewards influence rather than just sign-ups. (e.g., Reward users referring three other users who go on to complete meaningful actions.)",
-        "Visualize time and cost savings (e.g., \"You saved $12 on this swap using our aggregator vs. XYZ\"). These concrete benefits encourage ongoing use and social sharing.",
+        "Create a leaderboard showcasing user wins (e.g. \"0xABC saved $320 this month using [Feature]\".)",
+        "Design a referral system that rewards influence rather than just sign-ups. (e.g. Reward users referring three other users who go on to complete meaningful actions.)",
+        "Visualize time and cost savings (e.g. \"You saved $12 on this swap using our aggregator vs. XYZ\"). These concrete benefits encourage ongoing use and social sharing.",
         "Offer early previews or beta toggles labeled \"Power Users Only\". This makes them feel valued and invites their feedback.",
         "Allow users to display achievements or earned titles such as \"Early Adopter\" or \"Multichain Explorer.\"",
-        "Engage them with small-scale gamified activities (e.g., \"Find the hidden Easter egg\" or \"Claim a special NFT for trying this new feature\").",
+        "Engage them with small-scale gamified activities (e.g. \"Find the hidden Easter egg\" or \"Claim a special NFT for trying this new feature\").",
         "When they use advanced features successfully, acknowledge it. For example: \"You staked 1 ETH. Great move! Crypto's a little stronger today.\" A tongue-in-cheek note like this builds satisfaction and validates their expertise."
       ]
     };
