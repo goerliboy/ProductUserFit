@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
-import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, Globe, Twitter, MessageCircle, GraduationCap, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
 import ScoreGauge from '../components/ScoreGauge';
 import RadarChart from '../components/RadarChart';
-import { getSimilarProducts } from '../data/peerProducts';
 import { parseScoreRangeString, isValidScoreRange, getScoreRangeString } from '../utils/scoreUtils';
 import { supabase, FeedbackEntry } from '../lib/supabase';
 import { questions } from '../data/questions';
@@ -43,8 +42,6 @@ const Results: React.FC = () => {
   // Export state
   const [isExporting, setIsExporting] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
-
-  const similarProducts = getSimilarProducts(score);
 
   // Generate sample answers for static pages based on the score
   const generateSampleAnswers = (targetScore: number): Record<number, string> => {
@@ -147,7 +144,6 @@ const Results: React.FC = () => {
       // Wait for DOM to update
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Only include the main sections, excluding Similar Products
       const sectionRefs = [
         scoreRef,
         radarRef,
@@ -163,7 +159,7 @@ const Results: React.FC = () => {
         interpretation,
         idealUserProfile,
         recommendations,
-        similarProducts
+        similarProducts: [] // Empty array since we're not including similar products
       };
       
       await exportToPdf(sectionRefs, exportData);
@@ -186,7 +182,7 @@ const Results: React.FC = () => {
         interpretation,
         idealUserProfile,
         recommendations,
-        similarProducts
+        similarProducts: [] // Empty array since we're not including similar products
       };
       
       exportToCsv(exportData);
@@ -553,56 +549,6 @@ const Results: React.FC = () => {
                 );
               })}
             </div>
-          </div>
-        </div>
-
-        {/* Similar Products Section - Always visible on screen but not exported */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
-            Similar Products
-          </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {similarProducts.map((product) => (
-              <div key={product.name} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg flex flex-col hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <img 
-                    src={product.logo} 
-                    alt={`${product.name} logo`} 
-                    className="w-8 h-8 rounded-full"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://via.placeholder.com/32x32';
-                    }}
-                  />
-                  <div>
-                    <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 text-sm">{product.name}</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
-                  </div>
-                </div>
-                <div className="flex gap-2 mt-auto">
-                  <a
-                    href={product.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                  >
-                    <Globe size={12} />
-                    Website
-                  </a>
-                  <a
-                    href={product.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                  >
-                    <Twitter size={12} />
-                    Twitter
-                  </a>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
 
