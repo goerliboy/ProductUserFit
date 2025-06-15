@@ -59,17 +59,8 @@ export const exportToPdf = async (
     const reportDate = new Date().toLocaleDateString();
     pdf.text(`Generated on: ${reportDate}`, margin, 80);
     
-    // Add interpretation
-    pdf.setFontSize(14);
-    pdf.setTextColor(79, 70, 229);
-    pdf.text('Executive Summary', margin, 110);
-    
-    pdf.setFontSize(10);
-    pdf.setTextColor(0, 0, 0);
-    const interpretationLines = pdf.splitTextToSize(data.interpretation, contentWidth);
-    pdf.text(interpretationLines, margin, 125);
-    
-    let currentY = 125 + (interpretationLines.length * 5) + 20;
+    // Start content from the top of the page after title
+    let currentY = 110;
     
     // Add new page for visual content
     pdf.addPage();
