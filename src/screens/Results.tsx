@@ -570,7 +570,7 @@ const Results: React.FC = () => {
           >
             <MessageSquareHeart size={18} />
             Send Feedback
-          </button>
+          </a>
         </div>
 
         {/* Footer Credit */}
