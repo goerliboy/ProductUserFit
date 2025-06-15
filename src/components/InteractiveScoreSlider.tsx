@@ -77,7 +77,7 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
           <h2 className="text-2xl font-bold text-text-primary dark:text-white">Interactive Score Explorer</h2>
         </div>
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Drag the slider to explore different score analysis and insights for different scores in real-time.
+          Use the slider to explore how the analysis changes for each score in real-time.
         </p>
       </div>
 
