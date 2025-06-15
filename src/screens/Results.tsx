@@ -9,6 +9,7 @@ import RadarChart from '../components/RadarChart';
 import { getSimilarProducts } from '../data/peerProducts';
 import { parseScoreRangeString, isValidScoreRange, getScoreRangeString } from '../utils/scoreUtils';
 import { supabase, FeedbackEntry } from '../lib/supabase';
+import { questions } from '../data/questions';
 
 const Results: React.FC = () => {
   const navigate = useNavigate();
@@ -34,6 +35,34 @@ const Results: React.FC = () => {
   const [userId, setUserId] = useState<string>('');
 
   const similarProducts = getSimilarProducts(score);
+
+  // Generate sample answers for static pages based on the score
+  const generateSampleAnswers = (targetScore: number): Record<number, string> => {
+    const sampleAnswers: Record<number, string> = {};
+    
+    questions.forEach((question, index) => {
+      // Find the option that gets us closest to the target score
+      let bestOption = question.options[0];
+      let bestDiff = Math.abs(question.options[0].weight - targetScore);
+      
+      question.options.forEach(option => {
+        const diff = Math.abs(option.weight - targetScore);
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          bestOption = option;
+        }
+      });
+      
+      sampleAnswers[index] = bestOption.label;
+    });
+    
+    return sampleAnswers;
+  };
+
+  // Use actual answers if available, otherwise generate sample answers for static pages
+  const displayAnswers = isStaticPage && Object.keys(answers).length === 0 
+    ? generateSampleAnswers(score) 
+    : answers;
 
   useEffect(() => {
     // Only redirect if this is NOT a static page and user hasn't completed questionnaire
@@ -134,7 +163,10 @@ const Results: React.FC = () => {
               <h2 className="text-2xl font-bold text-text-primary dark:text-white">Category Analysis</h2>
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-sm max-w-2xl mx-auto">
-              Visual breakdown of your product's complexity across different crypto knowledge domains
+              {isStaticPage && Object.keys(answers).length === 0 
+                ? `Sample breakdown showing typical complexity patterns for products in the ${currentScoreRange} range`
+                : 'Visual breakdown of your product\'s complexity across different crypto knowledge domains'
+              }
             </p>
           </div>
           
@@ -147,7 +179,7 @@ const Results: React.FC = () => {
             {/* Chart container */}
             <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-inner">
               <div className="w-full max-w-2xl mx-auto aspect-square" ref={radarRef}>
-                <RadarChart answers={answers} />
+                <RadarChart answers={displayAnswers} />
               </div>
             </div>
           </div>
@@ -156,6 +188,9 @@ const Results: React.FC = () => {
           <div className="mt-6 text-center">
             <p className="text-xs text-gray-500 dark:text-gray-400 italic">
               Higher values indicate greater crypto expertise required from users
+              {isStaticPage && Object.keys(answers).length === 0 && (
+                <span className="block mt-1">Sample data shown for demonstration purposes</span>
+              )}
             </p>
           </div>
         </div>
