@@ -566,7 +566,7 @@ const Results: React.FC = () => {
             href="https://x.com/messages/compose?recipient_id=1327720803044093955"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-medium transition-all duration-300 shadow-lg hover:shadow-pink-500/25 transform hover:scale-105"
+            className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-gray-200 dark:bg-gray-600/40 hover:bg-gray-300 dark:hover:bg-gray-500/50 text-gray-700 dark:text-gray-200 transition-colors font-medium"
           >
             <MessageSquareHeart size={18} />
             Send Feedback
