@@ -254,19 +254,6 @@ const Results: React.FC = () => {
           </div>
         )}
 
-        {/* Current Analysis Results */}
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 border-l-4 border-indigo-500">
-          <h2 className="text-xl font-bold mb-2 text-indigo-900 dark:text-indigo-100">
-            {isStaticPage ? `Sample Analysis for Score Range ${currentScoreRange}` : 'Your Product Analysis'}
-          </h2>
-          <p className="text-indigo-700 dark:text-indigo-200">
-            {isStaticPage 
-              ? `This shows what a typical product scoring ${currentScoreRange} would look like. Use the interactive slider above to explore other ranges.`
-              : 'Based on your questionnaire responses, here\'s your detailed analysis.'
-            }
-          </p>
-        </div>
-
         {/* Score and Interpretation Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
