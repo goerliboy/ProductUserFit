@@ -43,4 +43,33 @@
     max-width: 100% !important;
     height: auto !important;
   }
+
+  /* Force light mode colors for PDF export */
+  * {
+    color: #111827 !important;
+    background-color: white !important;
+    border-color: #e5e7eb !important;
+  }
+
+  /* Preserve gradients and important visual elements */
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, #6366f1, #8b5cf6) !important;
+    color: white !important;
+  }
+
+  /* Ensure proper contrast for headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: #1f2937 !important;
+  }
+
+  /* Maintain indigo colors for important elements */
+  .text-indigo-600,
+  .text-indigo-500 {
+    color: #4f46e5 !important;
+  }
+
+  /* Ensure bullet points are visible */
+  .w-2.h-2.rounded-full {
+    background-color: #4f46e5 !important;
+  }
 }

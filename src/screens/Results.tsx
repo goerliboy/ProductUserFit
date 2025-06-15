@@ -144,6 +144,7 @@ const Results: React.FC = () => {
       // Wait for DOM to update
       await new Promise(resolve => setTimeout(resolve, 500));
       
+      // Include all sections including Growth Tactics
       const sectionRefs = [
         scoreRef,
         radarRef,
@@ -327,7 +328,7 @@ const Results: React.FC = () => {
                           </div>
                           
                           {/* Feedback buttons */}
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          <div className="flex items-center gap-2 flex-shrink-0 no-print">
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'like', area)}
                               className={`p-2 rounded-lg transition-all duration-200 ${
@@ -337,7 +338,7 @@ const Results: React.FC = () => {
                               }`}
                               title="This is helpful"
                             >
-                              <ThumbsUp size={14} />
+                              <ThumbsUp size={16} />
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'dislike', area)}
@@ -348,7 +349,7 @@ const Results: React.FC = () => {
                               }`}
                               title="This is not helpful"
                             >
-                              <ThumbsDown size={14} />
+                              <ThumbsDown size={16} />
                             </button>
                           </div>
                         </div>
@@ -384,7 +385,7 @@ const Results: React.FC = () => {
                           </div>
                           
                           {/* Feedback buttons */}
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          <div className="flex items-center gap-2 flex-shrink-0 no-print">
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'like', guide)}
                               className={`p-2 rounded-lg transition-all duration-200 ${
@@ -394,7 +395,7 @@ const Results: React.FC = () => {
                               }`}
                               title="This is helpful"
                             >
-                              <ThumbsUp size={14} />
+                              <ThumbsUp size={16} />
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'dislike', guide)}
@@ -405,7 +406,7 @@ const Results: React.FC = () => {
                               }`}
                               title="This is not helpful"
                             >
-                              <ThumbsDown size={14} />
+                              <ThumbsDown size={16} />
                             </button>
                           </div>
                         </div>
@@ -456,7 +457,7 @@ const Results: React.FC = () => {
                         </div>
                         
                         {/* Feedback buttons */}
-                        <div className="flex items-center gap-2 flex-shrink-0">
+                        <div className="flex items-center gap-2 flex-shrink-0 no-print">
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'like', principle)}
                             className={`p-2 rounded-lg transition-all duration-200 ${
@@ -520,7 +521,7 @@ const Results: React.FC = () => {
                       </div>
                       
                       {/* Feedback buttons */}
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="flex items-center gap-2 flex-shrink-0 no-print">
                         <button
                           onClick={() => handleFeedback('growthTactics', index, 'like', tactic)}
                           className={`p-2 rounded-lg transition-all duration-200 ${

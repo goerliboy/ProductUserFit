@@ -32,22 +32,13 @@ export interface ExportData {
 }
 
 /**
- * Export the results page as a PDF
+ * Export the results page as a PDF with light mode styling
  */
 export const exportToPdf = async (
   sectionRefs: React.RefObject<HTMLElement>[],
   data: ExportData
 ): Promise<void> => {
   try {
-    // Store original theme
-    const originalTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    
-    // Temporarily switch to light theme for PDF export
-    document.documentElement.classList.remove('dark');
-    
-    // Wait for theme change to take effect
-    await new Promise(resolve => setTimeout(resolve, 100));
-    
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -80,12 +71,9 @@ export const exportToPdf = async (
     
     let currentY = 125 + (interpretationLines.length * 5) + 20;
     
-    // Filter out similarProductsRef (last ref) from PDF export
-    const pdfSectionRefs = sectionRefs.slice(0, -1);
-    
-    // Capture and add each section (excluding Similar Products)
-    for (let i = 0; i < pdfSectionRefs.length; i++) {
-      const ref = pdfSectionRefs[i];
+    // Capture and add each section with light mode styling
+    for (let i = 0; i < sectionRefs.length; i++) {
+      const ref = sectionRefs[i];
       if (!ref.current) continue;
       
       try {
@@ -95,13 +83,25 @@ export const exportToPdf = async (
           currentY = margin;
         }
         
+        // Capture with forced light mode styling
         const canvas = await toPng(ref.current, {
           quality: 0.95,
           backgroundColor: '#ffffff',
           pixelRatio: 2,
           style: {
-            color: '#000000',
-            backgroundColor: '#ffffff'
+            // Force light mode colors for PDF
+            color: '#111827',
+            backgroundColor: '#ffffff',
+            // Override any dark mode styles
+            '--tw-text-opacity': '1',
+            '--tw-bg-opacity': '1'
+          },
+          filter: (node) => {
+            // Skip feedback buttons and interactive elements in PDF
+            if (node.classList) {
+              return !node.classList.contains('no-print');
+            }
+            return true;
           }
         });
         
@@ -123,22 +123,11 @@ export const exportToPdf = async (
       }
     }
     
-    // Restore original theme
-    if (originalTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-    
     // Save the PDF
     const fileName = `product-user-fit-analysis-${data.scoreRange.replace('.', '-')}-${Date.now()}.pdf`;
     pdf.save(fileName);
     
   } catch (error) {
-    // Ensure theme is restored even if export fails
-    const originalTheme = localStorage.getItem('theme');
-    if (originalTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    }
-    
     console.error('Error generating PDF:', error);
     throw new Error('Failed to generate PDF. Please try again.');
   }
@@ -205,8 +194,6 @@ export const exportToCsv = (data: ExportData): void => {
     data.recommendations.growthTactics.forEach((tactic, index) => {
       csvRows.push(`Tactic ${index + 1},"${tactic.replace(/"/g, '""')}"`);
     });
-    
-    // Note: Similar Products section removed from CSV export
     
     // Create and download CSV
     const csvContent = csvRows.join('\n');
