@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
 import { useTheme } from '../context/ThemeContext';
-import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown, AlertTriangle, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
 import ScoreGauge from '../components/ScoreGauge';
@@ -24,7 +24,6 @@ const Results: React.FC = () => {
   
   const { 
     score, 
-    categoryScores,
     interpretation, 
     idealUserProfile,
     recommendations 
@@ -213,30 +212,6 @@ const Results: React.FC = () => {
     }
   };
 
-  // Analyze category deviations for display
-  const getCategoryInsights = () => {
-    if (categoryScores.length === 0) return null;
-    
-    const threshold = 1.5;
-    const strengths: string[] = [];
-    const weaknesses: string[] = [];
-    
-    categoryScores.forEach(category => {
-      const deviation = category.score - score;
-      if (Math.abs(deviation) >= threshold) {
-        if (deviation > 0) {
-          strengths.push(`${category.category} (${category.score.toFixed(1)}/10)`);
-        } else {
-          weaknesses.push(`${category.category} (${category.score.toFixed(1)}/10)`);
-        }
-      }
-    });
-    
-    return { strengths, weaknesses };
-  };
-
-  const categoryInsights = getCategoryInsights();
-
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
@@ -260,58 +235,6 @@ const Results: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Category Insights Section - Only show if we have category data */}
-        {categoryInsights && (categoryInsights.strengths.length > 0 || categoryInsights.weaknesses.length > 0) && (
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700/50">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-blue-800 dark:text-blue-200">
-              <BarChart3 size={20} />
-              Category Analysis Insights
-            </h3>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              {categoryInsights.strengths.length > 0 && (
-                <div className="bg-white/60 dark:bg-gray-800/30 rounded-lg p-4">
-                  <h4 className="font-medium text-orange-700 dark:text-orange-300 mb-2 flex items-center gap-2">
-                    <AlertTriangle size={16} />
-                    Higher Complexity Areas
-                  </h4>
-                  <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                    {categoryInsights.strengths.map((strength, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
-                        {strength}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-xs text-orange-600 dark:text-orange-400 mt-2">
-                    These areas require special attention in user education and onboarding.
-                  </p>
-                </div>
-              )}
-              
-              {categoryInsights.weaknesses.length > 0 && (
-                <div className="bg-white/60 dark:bg-gray-800/30 rounded-lg p-4">
-                  <h4 className="font-medium text-green-700 dark:text-green-300 mb-2 flex items-center gap-2">
-                    <CheckCircle size={16} />
-                    More Accessible Areas
-                  </h4>
-                  <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                    {categoryInsights.weaknesses.map((weakness, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                        {weakness}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-xs text-green-600 dark:text-green-400 mt-2">
-                    These areas could help attract users intimidated by your overall complexity.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Radar Chart Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50" ref={radarRef}>

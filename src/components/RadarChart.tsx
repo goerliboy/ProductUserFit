@@ -71,9 +71,6 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
     categoryScores[category].total / categoryScores[category].count
   );
 
-  // Calculate overall average for comparison
-  const overallAverage = averages.length > 0 ? averages.reduce((sum, score) => sum + score, 0) / averages.length : 0;
-
   const data = {
     labels: categories,
     datasets: [
@@ -87,19 +84,6 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
         pointBorderColor: isDarkMode ? '#1f2937' : '#ffffff',
         pointHoverBackgroundColor: isDarkMode ? '#1f2937' : '#ffffff',
         pointHoverBorderColor: isDarkMode ? 'rgba(99, 102, 241, 1)' : 'rgba(79, 70, 229, 1)',
-      },
-      // Add overall average line for comparison
-      {
-        label: 'Overall Average',
-        data: new Array(categories.length).fill(overallAverage),
-        backgroundColor: 'transparent',
-        borderColor: isDarkMode ? 'rgba(156, 163, 175, 0.5)' : 'rgba(107, 114, 128, 0.5)',
-        borderWidth: 1,
-        borderDash: [5, 5],
-        pointBackgroundColor: 'transparent',
-        pointBorderColor: 'transparent',
-        pointHoverBackgroundColor: 'transparent',
-        pointHoverBorderColor: 'transparent',
       },
     ],
   };
@@ -133,18 +117,7 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
     },
     plugins: {
       legend: {
-        display: true,
-        position: 'bottom' as const,
-        labels: {
-          color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.8)',
-          font: {
-            size: 11,
-          },
-          filter: function(legendItem: any) {
-            // Only show the main dataset in legend, hide the average line
-            return legendItem.datasetIndex === 0;
-          }
-        },
+        display: false,
       },
       tooltip: {
         backgroundColor: isDarkMode ? 'rgba(31, 41, 55, 0.9)' : 'rgba(255, 255, 255, 0.9)',
@@ -154,17 +127,6 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
         displayColors: false,
         borderColor: isDarkMode ? 'rgba(99, 102, 241, 0.3)' : 'rgba(79, 70, 229, 0.3)',
         borderWidth: 1,
-        callbacks: {
-          label: function(context: any) {
-            if (context.datasetIndex === 0) {
-              const score = context.parsed.r;
-              const deviation = score - overallAverage;
-              const deviationText = deviation > 0 ? `+${deviation.toFixed(1)}` : deviation.toFixed(1);
-              return `${context.label}: ${score.toFixed(1)}/10 (${deviationText} from avg)`;
-            }
-            return null;
-          }
-        }
       },
     },
   };
