@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Slider, BarChart3, Info } from 'lucide-react';
+import { Sliders as Slider, BarChart3, Info } from 'lucide-react';
 import { useAnalyzerResults } from '../context/AnalyzerContext';
 import { getScoreRangeString } from '../utils/scoreUtils';
 import ScoreGauge from './ScoreGauge';
