@@ -1,4 +1,4 @@
-**What is the Product-User Fit Framework?**
+**What is Product-User Fit Framework?**
 
 It’s a tool built for crypto startup founders and marketers who want to stop guessing and start aligning.
 It helps you understand *how much crypto knowledge* your users actually need to make sense of your product.
