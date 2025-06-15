@@ -225,7 +225,7 @@ export const getRecommendations = (score: number): {
           "Allow free exploration post-setup, with contextual tips and tricks triggered at the right moments.",
           "Offer visible options to skip setup, alongside intuitive access to support (e.g. a persistent Help button or hover-based tooltips).",
           "Where there's risk, permit action but include subtle, clickable warning icons with explanatory context.",
-          "Use interactive hints only when needed. For example, on first use of a complex feature, a tooltip could suggest: \"Having trouble? Check our guide.\"",
+          "Use interactive hints only when needed. For instance, on first use of a complex feature, a tooltip could suggest: \"Having trouble? Check our guide.\"",
           "Provide clear post-action feedback. If a user completes a cross-chain transfer, summarize the result: \"You moved X from Ethereum to Starknet. Gas used: Y ETH. [View on Explorer].\"",
           "Introduce auto-suggested next steps. After completing one task, suggest another logically connected feature: \"Now that you've done X, you might want to explore Y.\""
         ]
@@ -239,7 +239,7 @@ export const getRecommendations = (score: number): {
         "Let users customize their home screen by pinning preferred data or widgets. This fosters a sense of control and ownership.",
         "Highlight anonymized trending wallets or popular strategies to inspire curiosity: \"12,345 users are earning on Protocol X. Join them!\"",
         "Create intuitive sequences. After funding their wallet, suggest next step: \"You funded your account. Next, try swapping or staking.\" This helps users unlock the full product experience smoothly.",
-        "Acknowledge achievements with badges or titles. For example, \"Congrats! Claim your badge for exploring 5 unique dapps on Base!\" This reinforces engagement through recognition.",
+        "Acknowledge achievements with badges or titles. For instance, \"Congrats! Claim your badge for exploring 5 unique dapps on Base!\" This reinforces engagement through recognition.",
         "Highlight tangible benefits. For instance, \"You saved $50 this month using [Product]!\" This reinforces behavior and drives further exploration."
       ]
     };
@@ -279,7 +279,7 @@ export const getRecommendations = (score: number): {
         "Offer early previews or beta toggles labeled \"Power Users Only\". This makes them feel valued and invites their feedback.",
         "Allow users to display achievements or earned titles such as \"Early Adopter\" or \"Multichain Explorer.\"",
         "Engage them with small-scale gamified activities (e.g. \"Find the hidden Easter egg\" or \"Claim a special NFT for trying this new feature\").",
-        "When they use advanced features successfully, acknowledge it. For example: \"You staked 1 ETH. Great move! Crypto's a little stronger today.\" A tongue-in-cheek note like this builds satisfaction and validates their expertise."
+        "When they use advanced features successfully, acknowledge it. For instance: \"You staked 1 ETH. Great move! Crypto's a little stronger today.\" A tongue-in-cheek note like this builds satisfaction and validates their expertise."
       ]
     };
   } else if (score >= 5.0 && score <= 5.9) {
