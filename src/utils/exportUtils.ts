@@ -39,6 +39,15 @@ export const exportToPdf = async (
   data: ExportData
 ): Promise<void> => {
   try {
+    // Store original theme
+    const originalTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    
+    // Temporarily switch to light theme for PDF export
+    document.documentElement.classList.remove('dark');
+    
+    // Wait for theme change to take effect
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -71,9 +80,12 @@ export const exportToPdf = async (
     
     let currentY = 125 + (interpretationLines.length * 5) + 20;
     
-    // Capture and add each section
-    for (let i = 0; i < sectionRefs.length; i++) {
-      const ref = sectionRefs[i];
+    // Filter out similarProductsRef (last ref) from PDF export
+    const pdfSectionRefs = sectionRefs.slice(0, -1);
+    
+    // Capture and add each section (excluding Similar Products)
+    for (let i = 0; i < pdfSectionRefs.length; i++) {
+      const ref = pdfSectionRefs[i];
       if (!ref.current) continue;
       
       try {
@@ -84,9 +96,13 @@ export const exportToPdf = async (
         }
         
         const canvas = await toPng(ref.current, {
-          quality: 0.8,
+          quality: 0.95,
           backgroundColor: '#ffffff',
           pixelRatio: 2,
+          style: {
+            color: '#000000',
+            backgroundColor: '#ffffff'
+          }
         });
         
         const imgData = canvas;
@@ -107,11 +123,22 @@ export const exportToPdf = async (
       }
     }
     
+    // Restore original theme
+    if (originalTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    
     // Save the PDF
     const fileName = `product-user-fit-analysis-${data.scoreRange.replace('.', '-')}-${Date.now()}.pdf`;
     pdf.save(fileName);
     
   } catch (error) {
+    // Ensure theme is restored even if export fails
+    const originalTheme = localStorage.getItem('theme');
+    if (originalTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    
     console.error('Error generating PDF:', error);
     throw new Error('Failed to generate PDF. Please try again.');
   }
@@ -178,14 +205,8 @@ export const exportToCsv = (data: ExportData): void => {
     data.recommendations.growthTactics.forEach((tactic, index) => {
       csvRows.push(`Tactic ${index + 1},"${tactic.replace(/"/g, '""')}"`);
     });
-    csvRows.push('');
     
-    // Add similar products
-    csvRows.push('SIMILAR PRODUCTS');
-    csvRows.push('Name,Category,Website,Twitter');
-    data.similarProducts.forEach(product => {
-      csvRows.push(`"${product.name}","${product.category}","${product.website}","${product.twitter}"`);
-    });
+    // Note: Similar Products section removed from CSV export
     
     // Create and download CSV
     const csvContent = csvRows.join('\n');

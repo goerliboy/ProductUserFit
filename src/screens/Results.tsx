@@ -35,7 +35,6 @@ const Results: React.FC = () => {
   const marketingRef = useRef<HTMLDivElement>(null);
   const onboardingRef = useRef<HTMLDivElement>(null);
   const growthRef = useRef<HTMLDivElement>(null);
-  const similarProductsRef = useRef<HTMLDivElement>(null);
 
   // Feedback state
   const [userFeedback, setUserFeedback] = useState<Record<string, 'like' | 'dislike' | null>>({});
@@ -44,10 +43,6 @@ const Results: React.FC = () => {
   // Export state
   const [isExporting, setIsExporting] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
-  const [showAllSectionsForExport, setShowAllSectionsForExport] = useState(false);
-
-  // State to control Similar Products section visibility
-  const [showSimilarProducts, setShowSimilarProducts] = useState(false);
 
   const similarProducts = getSimilarProducts(score);
 
@@ -147,21 +142,19 @@ const Results: React.FC = () => {
   // Export handlers
   const handleExportPDF = async () => {
     setIsExporting(true);
-    setShowAllSectionsForExport(true);
-    setShowSimilarProducts(true);
     
     try {
       // Wait for DOM to update
       await new Promise(resolve => setTimeout(resolve, 500));
       
+      // Only include the main sections, excluding Similar Products
       const sectionRefs = [
         scoreRef,
         radarRef,
         userProfileRef,
         marketingRef,
         onboardingRef,
-        growthRef,
-        similarProductsRef
+        growthRef
       ];
       
       const exportData: ExportData = {
@@ -179,8 +172,6 @@ const Results: React.FC = () => {
       alert('Export failed. Please try again.');
     } finally {
       setIsExporting(false);
-      setShowAllSectionsForExport(false);
-      setShowSimilarProducts(false);
       setShowExportOptions(false);
     }
   };
@@ -565,57 +556,55 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Similar Products Section - Show when exporting or when toggled */}
-        {(showSimilarProducts || showAllSectionsForExport) && (
-          <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={similarProductsRef}>
-            <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-              <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
-              Similar Products
-            </h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {similarProducts.map((product) => (
-                <div key={product.name} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg flex flex-col hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200">
-                  <div className="flex items-center gap-3 mb-3">
-                    <img 
-                      src={product.logo} 
-                      alt={`${product.name} logo`} 
-                      className="w-8 h-8 rounded-full"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = 'https://via.placeholder.com/32x32';
-                      }}
-                    />
-                    <div>
-                      <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 text-sm">{product.name}</h3>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 mt-auto">
-                    <a
-                      href={product.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                    >
-                      <Globe size={12} />
-                      Website
-                    </a>
-                    <a
-                      href={product.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
-                    >
-                      <Twitter size={12} />
-                      Twitter
-                    </a>
+        {/* Similar Products Section - Always visible on screen but not exported */}
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
+            <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
+            Similar Products
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {similarProducts.map((product) => (
+              <div key={product.name} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg flex flex-col hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors duration-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <img 
+                    src={product.logo} 
+                    alt={`${product.name} logo`} 
+                    className="w-8 h-8 rounded-full"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://via.placeholder.com/32x32';
+                    }}
+                  />
+                  <div>
+                    <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 text-sm">{product.name}</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+                <div className="flex gap-2 mt-auto">
+                  <a
+                    href={product.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
+                  >
+                    <Globe size={12} />
+                    Website
+                  </a>
+                  <a
+                    href={product.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors"
+                  >
+                    <Twitter size={12} />
+                    Twitter
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
