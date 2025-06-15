@@ -124,43 +124,41 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Radar Chart Section - Only show for dynamic results (after questionnaire) */}
-        {!isStaticPage && (
-          <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30">
-                  <BarChart3 size={24} className="text-indigo-600 dark:text-indigo-400" />
-                </div>
-                <h2 className="text-2xl font-bold text-text-primary dark:text-white">Category Analysis</h2>
+        {/* Radar Chart Section - Now always visible */}
+        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30">
+                <BarChart3 size={24} className="text-indigo-600 dark:text-indigo-400" />
               </div>
-              <p className="text-gray-600 dark:text-gray-300 text-sm max-w-2xl mx-auto">
-                Visual breakdown of your product's complexity across different crypto knowledge domains
-              </p>
+              <h2 className="text-2xl font-bold text-text-primary dark:text-white">Category Analysis</h2>
             </div>
+            <p className="text-gray-600 dark:text-gray-300 text-sm max-w-2xl mx-auto">
+              Visual breakdown of your product's complexity across different crypto knowledge domains
+            </p>
+          </div>
+          
+          <div className="relative">
+            {/* Decorative background elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-2xl"></div>
+            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 dark:from-indigo-700/20 dark:to-purple-700/20 rounded-full blur-xl"></div>
+            <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-purple-200/20 to-indigo-200/20 dark:from-purple-700/20 dark:to-indigo-700/20 rounded-full blur-xl"></div>
             
-            <div className="relative">
-              {/* Decorative background elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-2xl"></div>
-              <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 dark:from-indigo-700/20 dark:to-purple-700/20 rounded-full blur-xl"></div>
-              <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-purple-200/20 to-indigo-200/20 dark:from-purple-700/20 dark:to-indigo-700/20 rounded-full blur-xl"></div>
-              
-              {/* Chart container */}
-              <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-inner">
-                <div className="w-full max-w-2xl mx-auto aspect-square" ref={radarRef}>
-                  <RadarChart answers={answers} />
-                </div>
+            {/* Chart container */}
+            <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-inner">
+              <div className="w-full max-w-2xl mx-auto aspect-square" ref={radarRef}>
+                <RadarChart answers={answers} />
               </div>
-            </div>
-            
-            {/* Chart legend/description */}
-            <div className="mt-6 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400 italic">
-                Higher values indicate greater crypto expertise required from users
-              </p>
             </div>
           </div>
-        )}
+          
+          {/* Chart legend/description */}
+          <div className="mt-6 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+              Higher values indicate greater crypto expertise required from users
+            </p>
+          </div>
+        </div>
 
         {/* Ideal User Profile Section */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg">
