@@ -71,58 +71,28 @@ export const exportToPdf = async (
     
     let currentY = 125 + (interpretationLines.length * 5) + 20;
     
-    // Capture and add each section with forced light mode styling
+    // Add new page for visual content
+    pdf.addPage();
+    currentY = margin;
+    
+    // Capture and add each section
     for (let i = 0; i < sectionRefs.length; i++) {
       const ref = sectionRefs[i];
       if (!ref.current) continue;
       
       try {
-        // Add new page for each section (except the first one if it fits)
-        if (i > 0 || currentY > pageHeight - 100) {
-          pdf.addPage();
-          currentY = margin;
-        }
+        // Temporarily add light mode class to body for clean capture
+        const originalBodyClass = document.body.className;
+        document.body.className = document.body.className.replace('dark', '');
         
-        // Create a temporary clone of the element with forced light mode styles
-        const originalElement = ref.current;
-        const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+        // Wait a moment for styles to apply
+        await new Promise(resolve => setTimeout(resolve, 100));
         
-        // Apply aggressive light mode styling to the clone
-        const applyLightModeStyles = (element: HTMLElement) => {
-          // Force white background and black text
-          element.style.backgroundColor = '#ffffff';
-          element.style.color = '#111827';
-          element.style.borderColor = '#e5e7eb';
-          
-          // Remove any dark mode classes
-          element.classList.remove('dark:bg-gray-800/50', 'dark:bg-gray-700/30', 'dark:text-white', 'dark:text-gray-200', 'dark:border-gray-700');
-          
-          // Add light mode classes
-          element.classList.add('bg-white', 'text-gray-900');
-          
-          // Recursively apply to all children
-          Array.from(element.children).forEach(child => {
-            if (child instanceof HTMLElement) {
-              applyLightModeStyles(child);
-            }
-          });
-        };
-        
-        // Apply light mode styles to the clone
-        applyLightModeStyles(clonedElement);
-        
-        // Temporarily add clone to DOM for capture
-        clonedElement.style.position = 'absolute';
-        clonedElement.style.left = '-9999px';
-        clonedElement.style.top = '0';
-        clonedElement.style.width = originalElement.offsetWidth + 'px';
-        document.body.appendChild(clonedElement);
-        
-        // Capture the clone with light mode styling
-        const canvas = await toPng(clonedElement, {
+        // Capture the section with light mode styling
+        const canvas = await toPng(ref.current, {
           quality: 0.95,
           backgroundColor: '#ffffff',
-          pixelRatio: 2,
+          pixelRatio: 1.5,
           style: {
             backgroundColor: '#ffffff',
             color: '#111827'
@@ -136,12 +106,12 @@ export const exportToPdf = async (
           }
         });
         
-        // Remove the clone from DOM
-        document.body.removeChild(clonedElement);
+        // Restore original body class
+        document.body.className = originalBodyClass;
         
         const imgData = canvas;
         const imgWidth = contentWidth;
-        const imgHeight = (originalElement.offsetHeight * contentWidth) / originalElement.offsetWidth;
+        const imgHeight = (ref.current.offsetHeight * contentWidth) / ref.current.offsetWidth;
         
         // Check if image fits on current page
         if (currentY + imgHeight > pageHeight - margin) {
@@ -156,6 +126,154 @@ export const exportToPdf = async (
         console.warn(`Failed to capture section ${i}:`, error);
       }
     }
+    
+    // Add detailed text content on new pages
+    pdf.addPage();
+    currentY = margin;
+    
+    // Ideal User Profile
+    pdf.setFontSize(16);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Ideal User Profile', margin, currentY);
+    currentY += 15;
+    
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0);
+    
+    const profileSections = [
+      { title: 'Experience Level', content: data.idealUserProfile.experienceLevel },
+      { title: 'Knowledge Base', content: data.idealUserProfile.knowledgeBase },
+      { title: 'Behavior', content: data.idealUserProfile.behavior },
+      { title: 'Expectations', content: data.idealUserProfile.expectations }
+    ];
+    
+    profileSections.forEach(section => {
+      pdf.setFontSize(11);
+      pdf.setTextColor(79, 70, 229);
+      pdf.text(section.title, margin, currentY);
+      currentY += 8;
+      
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 0);
+      const lines = pdf.splitTextToSize(section.content, contentWidth);
+      pdf.text(lines, margin, currentY);
+      currentY += lines.length * 5 + 8;
+      
+      if (currentY > pageHeight - 40) {
+        pdf.addPage();
+        currentY = margin;
+      }
+    });
+    
+    // Marketing Strategy
+    if (currentY > pageHeight - 60) {
+      pdf.addPage();
+      currentY = margin;
+    }
+    
+    pdf.setFontSize(16);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Marketing Strategy', margin, currentY);
+    currentY += 15;
+    
+    pdf.setFontSize(10);
+    pdf.setTextColor(0, 0, 0);
+    const marketingLines = pdf.splitTextToSize(data.recommendations.marketing.main, contentWidth);
+    pdf.text(marketingLines, margin, currentY);
+    currentY += marketingLines.length * 5 + 10;
+    
+    // Key Focus Areas
+    pdf.setFontSize(12);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Key Focus Areas', margin, currentY);
+    currentY += 10;
+    
+    data.recommendations.marketing.keyAreas.forEach((area, index) => {
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 0);
+      const areaLines = pdf.splitTextToSize(`${index + 1}. ${area}`, contentWidth - 10);
+      pdf.text(areaLines, margin + 5, currentY);
+      currentY += areaLines.length * 5 + 3;
+      
+      if (currentY > pageHeight - 40) {
+        pdf.addPage();
+        currentY = margin;
+      }
+    });
+    
+    // Content Strategy
+    currentY += 5;
+    pdf.setFontSize(12);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Content Strategy', margin, currentY);
+    currentY += 10;
+    
+    data.recommendations.marketing.contentGuide.forEach((guide, index) => {
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 0);
+      const guideLines = pdf.splitTextToSize(`${index + 1}. ${guide}`, contentWidth - 10);
+      pdf.text(guideLines, margin + 5, currentY);
+      currentY += guideLines.length * 5 + 3;
+      
+      if (currentY > pageHeight - 40) {
+        pdf.addPage();
+        currentY = margin;
+      }
+    });
+    
+    // Onboarding Principles
+    if (currentY > pageHeight - 60) {
+      pdf.addPage();
+      currentY = margin;
+    }
+    
+    pdf.setFontSize(16);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Onboarding Principles', margin, currentY);
+    currentY += 15;
+    
+    pdf.setFontSize(10);
+    pdf.setTextColor(0, 0, 0);
+    const onboardingLines = pdf.splitTextToSize(data.recommendations.onboarding.main, contentWidth);
+    pdf.text(onboardingLines, margin, currentY);
+    currentY += onboardingLines.length * 5 + 10;
+    
+    data.recommendations.onboarding.principles.forEach((principle, index) => {
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 0);
+      const principleLines = pdf.splitTextToSize(`${index + 1}. ${principle}`, contentWidth - 10);
+      pdf.text(principleLines, margin + 5, currentY);
+      currentY += principleLines.length * 5 + 3;
+      
+      if (currentY > pageHeight - 40) {
+        pdf.addPage();
+        currentY = margin;
+      }
+    });
+    
+    // Growth Tactics
+    if (currentY > pageHeight - 60) {
+      pdf.addPage();
+      currentY = margin;
+    }
+    
+    pdf.setFontSize(16);
+    pdf.setTextColor(79, 70, 229);
+    pdf.text('Growth Tactics', margin, currentY);
+    currentY += 15;
+    
+    data.recommendations.growthTactics.forEach((tactic, index) => {
+      pdf.setFontSize(10);
+      pdf.setTextColor(0, 0, 0);
+      const tacticLines = pdf.splitTextToSize(`${index + 1}. ${tactic}`, contentWidth - 10);
+      pdf.text(tacticLines, margin + 5, currentY);
+      currentY += tacticLines.length * 5 + 3;
+      
+      if (currentY > pageHeight - 40) {
+        pdf.addPage();
+        currentY = margin;
+      }
+    });
     
     // Save the PDF
     const fileName = `product-user-fit-analysis-${data.scoreRange.replace('.', '-')}-${Date.now()}.pdf`;
