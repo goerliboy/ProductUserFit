@@ -5,11 +5,6 @@ import { useAnalyzer } from '../context/AnalyzerContext';
 const Introduction: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSkipToResults = () => {
-    // Navigate directly to results for 3.0-3.9 score range
-    navigate('/results/3.0-3.9');
-  };
-
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
@@ -57,14 +52,6 @@ const Introduction: React.FC = () => {
             className="w-full px-8 py-3 text-lg font-medium rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20 text-white"
           >
             Start Analysis
-          </button>
-          
-          {/* Temporary skip button */}
-          <button
-            onClick={handleSkipToResults}
-            className="w-full px-6 py-2 text-sm font-medium rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 text-gray-700 dark:text-white transition-colors border border-gray-300 dark:border-gray-600"
-          >
-            Skip to Sample Results (3.0-3.9 Range)
           </button>
         </div>
       </div>
