@@ -27,9 +27,11 @@ const Results: React.FC = () => {
     recommendations 
   } = useAnalyzerResults(scoreFromUrl);
 
-  // Refs for PDF export
+  // Refs for PDF export - Only visual elements that should be captured as images
   const scoreRef = useRef<HTMLDivElement>(null);
   const radarRef = useRef<HTMLDivElement>(null);
+  
+  // These refs are for text sections that will be rendered as native PDF text
   const userProfileRef = useRef<HTMLDivElement>(null);
   const marketingRef = useRef<HTMLDivElement>(null);
   const onboardingRef = useRef<HTMLDivElement>(null);
@@ -144,14 +146,10 @@ const Results: React.FC = () => {
       // Wait for DOM to update
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Include all sections including Growth Tactics
-      const sectionRefs = [
+      // Only include visual sections (Score Gauge and Radar Chart) for image capture
+      const visualSectionRefs = [
         scoreRef,
-        radarRef,
-        userProfileRef,
-        marketingRef,
-        onboardingRef,
-        growthRef
+        radarRef
       ];
       
       const exportData: ExportData = {
@@ -163,7 +161,7 @@ const Results: React.FC = () => {
         similarProducts: [] // Empty array since we're not including similar products
       };
       
-      await exportToPdf(sectionRefs, exportData);
+      await exportToPdf(visualSectionRefs, exportData);
     } catch (error) {
       console.error('Export failed:', error);
       alert('Export failed. Please try again.');
@@ -208,7 +206,7 @@ const Results: React.FC = () => {
       </div>
 
       <div className="max-w-4xl w-full space-y-8">
-        {/* Score and Interpretation Section */}
+        {/* Score and Interpretation Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
             <div className="w-48 h-48 mb-6 md:mb-0 flex-shrink-0">
@@ -220,7 +218,7 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Radar Chart Section - Now always visible */}
+        {/* Radar Chart Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50" ref={radarRef}>
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -262,7 +260,7 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Ideal User Profile Section */}
+        {/* Ideal User Profile Section - Will be rendered as text in PDF */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={userProfileRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
@@ -289,7 +287,7 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Marketing Strategy Section */}
+        {/* Marketing Strategy Section - Will be rendered as text in PDF */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={marketingRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <MessageSquare size={20} className="text-indigo-500 dark:text-indigo-400" />
@@ -419,7 +417,7 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Onboarding Principles Section */}
+        {/* Onboarding Principles Section - Will be rendered as text in PDF */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={onboardingRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <Shield size={20} className="text-indigo-500 dark:text-indigo-400" />
@@ -490,7 +488,7 @@ const Results: React.FC = () => {
           </div>
         </div>
 
-        {/* Growth Tactics Section with Feedback */}
+        {/* Growth Tactics Section - Will be rendered as text in PDF */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={growthRef}>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
             <TrendingUp size={20} className="text-indigo-500 dark:text-indigo-400" />
