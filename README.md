@@ -1,22 +1,96 @@
-**What is Product-User Fit Framework?**
+# Product-User Fit Framework
 
-It’s a tool built for crypto startup founders and marketers who want to stop guessing and start aligning.
-It helps you understand *how much crypto knowledge* your users actually need to make sense of your product.
+Know your user. Reduce friction. Grow smarter.
 
-![Product-User Fit Framework](https://i.imgur.com/r3gvHEU.png)
+![Product-User Fit Framework](https://i.imgur.com/nGELFv5.gif)
 
-**Here’s how it works:**
-* You answer 18 questions about your product; how clear the concept is, how much it relies on crypto-native primitives etc.
-* It gives a Friction Index Score (_how difficult your product is_) and tailored insights based on the score:
 
-  * Product Intepretation
-  * Category Radar Chart (_visual breakdown of your product's complexity across different knowledge domains_)
-  * Ideal User Profile (_experience level, knowledge base, behavior, expectations_)
-  * Onboarding Principles
-  * Marketing Strategy (_key focus areas, content strategy_)
-  * Growth Tactics
-  * Similar to your products (_soon_)
+## What is this?
 
-In short: it tells you *who* your product is really for and how to talk to them.
+The Product-User Fit Framework helps crypto startup founders, growth and product teams answer one deceptively hard question:
 
-Click **[here](https://sprightly-sunshine-963b89.netlify.app/)** to check out Product-User Fit Framework.
+> _"Do my users actually understand what we’ve built?"_
+
+If you’ve shipped features, launched campaigns, or revamped onboarding, only to watch users bounce, this tool is for you.
+
+
+## How it works
+
+1. **Answer 18 structured questions** about your product’s concept clarity, reliance on crypto-native mechanics, and user-facing complexity.
+2. Get a **Friction Index Score**, a quantitative measure of how hard your product is to understand.
+3. Receive a tailored, actionable report that includes:
+
+   - **Product Interpretation Summary**
+   - **Category Radar Chart** — visual complexity mapping
+   - **Ideal User Profile** – experience, expectations, and behavior
+   - **Onboarding Principles** – how to greet the right user the right way
+   - **Marketing Strategy** – what to say, where, and to whom
+   - **Growth Tactics** – your product’s traction levers
+   - **Comparable Products** (coming soon)
+
+
+## Why this matters
+
+Product-User Fit is what happens before Product-Market Fit. It tells you:
+- Who your product is really for
+- What your user *needs to know* to make sense of it
+- How to align UX, onboarding, and GTM strategy to reduce confusion and increase adoption
+
+This isn’t guesswork. It’s structured clarity—delivered fast.
+
+## Methodology: How the Framework Was Built
+
+To calibrate the **Product-User Fit Framework**, I conducted a UX, UI, and GTM audit of dozens of crypto products spanning a wide range of categories from the instantly intuitive to the “_what the hell is this even?_” tier.
+
+Each product was assessed for:
+- Conceptual clarity
+- Reliance on crypto-native primitives
+- Expected user knowledge
+- Onboarding friction
+
+Based on this, I assigned a **Difficulty Score** (1–10) and categorized each product accordingly.
+
+### 📊 Difficulty Score Breakdown
+
+| Score Range | Interpretation | Example Products |
+|-------------|----------------|------------------|
+| **1.0–1.9** | 🟢 Beginner-friendly | Cash App Bitcoin, PayPal Crypto, Revolut Crypto, Robinhood Crypto, Strike, Venmo Crypto |
+| **2.0–2.9** | 🟢 Accessible | Binance, Bitstamp, Bybit, Coinbase, Crypto.com, Gemini, Kraken, MEXC, OKX |
+| **3.0–3.9** | 🟡 Web3-leaning | Argent Wallet, Dmail, DeBank, Defi App, Farcaster, Hey.xyz, Infinex, Phantom, Zora |
+| **4.0–4.9** | 🟡 Moderate | Coinbase Wallet, ENS, Galxe, Layer3, MetaMask, Rabby Wallet, Rainbow, Trust Wallet, Zapper, OpenSea |
+| **5.0–5.9** | 🟠 DeFi-focused | 1Inch, Jupiter, Layerswap, PancakeSwap, Raydium, Stargate, Trader Joe, Uniswap |
+| **6.0–6.9** | 🟠 High-friction | dYdX, Hyperliquid, Snapshot, Synthetix, Virtuals Protocol, Ledger Live, Trezor Suite |
+| **7.0–7.9** | 🔴 Advanced | Aave, Curve Finance, EigenLayer, Instadapp, Lido, MakerDAO, Pendle, Safe Wallet, Yearn Finance |
+| **8.0–8.9** | 🔴 Infrastructure-heavy | Alchemy, Biconomy, Blockscout, Caldera, Chainlink, Dune, Etherscan, Gelato Network, Infura, Livepeer, The Graph, XMTP |
+| **9.0–9.9** | 🧠 Protocol-layer | Aleo, Arbitrum, Avalanche, Celestia, Cosmos, Lens Protocol, MegaETH, OP Stack, Polygon, Solana, StarkNet, zkSync |
+| **10.0**    | 🧪 Crypto Architect | Aztec, Flashbots, Foundry, Geth, Halo2, Hardhat, Lighthouse, Noir, Risc Zero, Succinct, Tenderly |
+
+
+
+## Use Cases
+
+- You’re preparing a **launch** and want to match messaging to user maturity
+- You’re seeing **low activation** or user confusion and don’t know why
+- You need to **train your team** on who the product is actually for
+- You’re crafting a **VC pitch** and want to show product-user alignment with data
+- You want to design onboarding that *works*
+
+
+## Who should use it?
+
+- Crypto startup founders
+- Crypto marketers
+- Growth and product teams
+- UX researchers and onboarding designers
+
+
+## Try it now
+
+🔗 [Launch the Framework](https://sprightly-sunshine-963b89.netlify.app/)  
+
+Spend 5 minutes. Get months of clarity.
+
+
+## Feedback? Questions?
+
+Slide in my DMs on [X](https://x.com/zeroXserdar) or [Telegram](https://t.me/iamserdareth).
