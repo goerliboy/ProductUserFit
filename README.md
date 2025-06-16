@@ -7,7 +7,7 @@ It helps you understand *how much crypto knowledge* your users actually need to 
 
 **Here’s how it works:**
 * You answer 18 questions about your product; how clear the concept is, how much it relies on crypto-native primitives etc.
-* It gives a Friction Index Score (_how difficult your product is_), and tailored insights based on the score:
+* It gives a Friction Index Score (_how difficult your product is_) and tailored insights based on the score:
 
   * Product Intepretation
   * Category Radar Chart (_visual breakdown of your product's complexity across different knowledge domains_)
