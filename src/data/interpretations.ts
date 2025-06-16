@@ -312,7 +312,7 @@ export const getRecommendations = (score: number): {
       growthTactics: [
         "Consistently release features that allow users to replace multiple tools with yours (e.g. portfolio tracking, real-time yield comparison, advanced analytics). This encourages consolidation around your platform.",
         "Let users auto-generate stylish, data-backed analytics cards to share on social media e.g. \"Your activity in May: $12k swapped, 4 chains used, $56 saved on fees.\"",
-        "Implement loyalty rewards tailored to advanced users. Perhaps they get zero-fee swaps, exclusive features for consistent use or for referring other power users. They are often in small networks of other power users. If you provide incentives for them to bring in high-value users, they will probably bring them in.",
+        "Implement loyalty rewards for advanced users: zero-fee swaps, exclusive features, and referral perks for bringing in other power users. They're usually connected to others like them, so the right incentive can activate high-value network effects.",
         "Sponsor and attend hackathons, trading competitions, and crypto events. These events attract the users who'll advocate your platform if impressed.",
         "Launch experimental or advanced features as invite-only beta tools, clearly labeled as such (\"Expert users only\"). They love having something unique to play with (and to talk about).",
         "Invite your most advanced users into private beta groups or advisory channels. The sense of ownership increases retention and brand loyalty.",
