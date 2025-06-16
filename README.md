@@ -3,6 +3,8 @@
 It’s a tool built for crypto startup founders and marketers who want to stop guessing and start aligning.
 It helps you understand *how much crypto knowledge* your users actually need to make sense of your product.
 
+![Product-User Fit Framework](https://i.ibb.co/cXXCV710/Product-User-Fit-Framework.gif)
+
 **Here’s how it works:**
 * You answer 18 questions about your product; how clear the concept is, how much it relies on crypto-native primitives etc.
 * It gives your product a Friction Index Score, and gives you tailored insights based on the score:
