@@ -50,7 +50,7 @@ Each product was assessed for:
 
 Based on this, I assigned a **Difficulty Score** (1–10) and categorized each product accordingly.
 
-### 📊 Difficulty Score Breakdown
+### Difficulty Score Breakdown
 
 | Score Range | Interpretation | Example Products |
 |-------------|----------------|------------------|
