@@ -18,6 +18,5 @@ It helps you understand *how much crypto knowledge* your users actually need to 
   * Similar to your products (_soon_)
 
 In short: it tells you *who* your product is really for and how to talk to them.
-Not based on vibes. Based on structure.
 
 Click **[here](https://sprightly-sunshine-963b89.netlify.app/)** to try Product-User Fit Framework.
