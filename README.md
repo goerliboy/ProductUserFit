@@ -13,7 +13,7 @@ It helps you understand *how much crypto knowledge* your users actually need to 
   * Onboarding Principles
   * Marketing Strategy (_key focus areas, content strategy_)
   * Growth Tactics
-  * Similar products to your products (_soon_)
+  * Similar to your products (_soon_)
 
 In short: it tells you *who* your product is really for and how to talk to them.
 Not based on vibes. Based on structure.
