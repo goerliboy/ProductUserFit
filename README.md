@@ -61,7 +61,7 @@ Based on this, I assigned a **Difficulty Score** (1–10) and categorized each p
 | **5.0–5.9** | 🟠 DeFi-focused | 1Inch, Jupiter, Layerswap, PancakeSwap, Raydium, Stargate, Trader Joe, Uniswap |
 | **6.0–6.9** | 🟠 High-friction | dYdX, Hyperliquid, Snapshot, Synthetix, Virtuals Protocol, Ledger Live, Trezor Suite |
 | **7.0–7.9** | 🔴 Advanced | Aave, Curve Finance, EigenLayer, Instadapp, Lido, MakerDAO, Pendle, Safe Wallet, Yearn Finance |
-| **8.0–8.9** | 🔴 Infrastructure-heavy | Alchemy, Biconomy, Blockscout, Caldera, Chainlink, Dune, Etherscan, Gelato Network, Infura, Livepeer, The Graph, XMTP |
+| **8.0–8.9** | 🔴 Infra-heavy | Alchemy, Biconomy, Blockscout, Caldera, Chainlink, Dune, Etherscan, Gelato Network, Infura, Livepeer, The Graph, XMTP |
 | **9.0–9.9** | 🧠 Protocol-layer | Aleo, Arbitrum, Avalanche, Celestia, Cosmos, Lens Protocol, MegaETH, OP Stack, Polygon, Solana, StarkNet, zkSync |
 | **10.0**    | 🧪 Gigachad-layer | Aztec, Flashbots, Foundry, Geth, Halo2, Hardhat, Lighthouse, Noir, Risc Zero, Succinct, Tenderly |
 
