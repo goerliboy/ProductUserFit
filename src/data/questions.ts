@@ -22,7 +22,7 @@ export const questions: QuestionType[] = [
       { label: "B", text: "Clear with a brief explanation, relates to a familiar web2 concept.", weight: 3 },
       { label: "C", text: "Understandable if they know basic crypto concepts.", weight: 5 },
       { label: "D", text: "Requires understanding of a specific crypto niche (e.g. DeFi, NFTs).", weight: 6 },
-      { label: "E", text: "Relies on understanding multiple complex crypto concepts and their interplay.", weight: 8 },
+      { label: "E", text: "Relies on understanding multiple crypto concepts and their interplay.", weight: 8 },
       { label: "F", text: "Highly abstract or theoretical, requires deep crypto expertise to comprehend its value.", weight: 10 }
     ]
   },
