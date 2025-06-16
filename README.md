@@ -19,4 +19,4 @@ It helps you understand *how much crypto knowledge* your users actually need to 
 
 In short: it tells you *who* your product is really for and how to talk to them.
 
-Click **[here](https://sprightly-sunshine-963b89.netlify.app/)** to try Product-User Fit Framework.
+Click **[here](https://sprightly-sunshine-963b89.netlify.app/)** to check out Product-User Fit Framework.
