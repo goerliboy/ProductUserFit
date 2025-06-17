@@ -2,6 +2,8 @@
 
 Know your user. Reduce friction. Grow smarter.
 
+[![Check Product-User Fit](https://i.imgur.com/3vvJH7F.png)](https://sprightly-sunshine-963b89.netlify.app/)
+
 ![Product-User Fit Framework](https://i.imgur.com/nGELFv5.gif)
 
 
@@ -16,7 +18,7 @@ If you’ve shipped features, launched campaigns, or revamped onboarding, only t
 
 ## How it works
 
-1. **Answer 18 structured questions** about your product’s concept clarity, reliance on crypto-native mechanics, and user-facing complexity.
+1. **Answer 18 questions** about your product’s concept clarity, reliance on crypto-native mechanics, and user-facing complexity.
 2. Get a **Friction Index Score**, a quantitative measure of how hard your product is to understand.
 3. Receive a tailored, actionable report that includes:
 
@@ -86,7 +88,7 @@ Based on this, I assigned a **Difficulty Score** (1–10) and categorized each p
 
 ## Try it now
 
-🔗 [Launch the Framework](https://sprightly-sunshine-963b89.netlify.app/)  
+🔗 [Launch the app](https://sprightly-sunshine-963b89.netlify.app/)  
 
 Spend 5 minutes. Get months of clarity.
 
