@@ -119,7 +119,7 @@ const Explore: React.FC = () => {
           Score Analysis For All
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Explore each Friction Index score to see its analysis and insights. Click any card for details.
+          Explore each Friction Index score to see its analysis. Click any card for details.
         </p>
       </div>
 
