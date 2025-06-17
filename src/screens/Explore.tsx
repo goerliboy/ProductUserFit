@@ -17,7 +17,7 @@ const scoreRanges: ScoreRangeData[] = [
     range: '1.0-1.9',
     label: 'Beginner-friendly',
     description: 'Anyone can use without crypto knowledge',
-    examples: ['Cash App Bitcoin', 'PayPal Crypto', 'Revolut'],
+    examples: ['Revolut Crypto', 'Cash App Bitcoin', 'PayPal Crypto'],
     color: 'text-green-600 dark:text-green-400',
     bgColor: 'bg-green-100 dark:bg-green-900/30',
     hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -25,7 +25,7 @@ const scoreRanges: ScoreRangeData[] = [
   {
     range: '2.0-2.9',
     label: 'Accessible',
-    description: 'Basic crypto familiarity helpful',
+    description: 'Basic crypto familiarity is useful',
     examples: ['Binance', 'Coinbase', 'Kraken', 'Gemini'],
     color: 'text-green-600 dark:text-green-400',
     bgColor: 'bg-green-100 dark:bg-green-900/30',
@@ -34,8 +34,8 @@ const scoreRanges: ScoreRangeData[] = [
   {
     range: '3.0-3.9',
     label: 'Web3-leaning',
-    description: 'Some crypto concepts required',
-    examples: ['Phantom', 'Farcaster', 'Zora', 'DeBank'],
+    description: 'Basic crypto concepts required',
+    examples: ['Argent', 'Phantom', 'Farcaster'],
     color: 'text-yellow-600 dark:text-yellow-400',
     bgColor: 'bg-yellow-100 dark:bg-yellow-900/30',
     hoverColor: 'hover:bg-yellow-50 dark:hover:bg-yellow-900/20'
@@ -43,8 +43,8 @@ const scoreRanges: ScoreRangeData[] = [
   {
     range: '4.0-4.9',
     label: 'Moderate',
-    description: 'Crypto experience expected',
-    examples: ['MetaMask', 'OpenSea', 'ENS', 'Rainbow'],
+    description: 'Moderate crypto experience needed',
+    examples: ['MetaMask', 'OpenSea', 'ENS'],
     color: 'text-orange-600 dark:text-orange-400',
     bgColor: 'bg-orange-100 dark:bg-orange-900/30',
     hoverColor: 'hover:bg-orange-50 dark:hover:bg-orange-900/20'
@@ -79,7 +79,7 @@ const scoreRanges: ScoreRangeData[] = [
   {
     range: '8.0-8.9',
     label: 'Infra-heavy',
-    description: 'Technical infrastructure focus',
+    description: 'Technical infra focus',
     examples: ['Alchemy', 'Chainlink', 'Etherscan', 'Dune'],
     color: 'text-purple-600 dark:text-purple-400',
     bgColor: 'bg-purple-100 dark:bg-purple-900/30',
@@ -89,7 +89,7 @@ const scoreRanges: ScoreRangeData[] = [
     range: '9.0-9.9',
     label: 'Protocol-layer',
     description: 'Protocol development expertise',
-    examples: ['Arbitrum', 'Solana', 'Polygon', 'zkSync'],
+    examples: ['Arbitrum', 'Solana', 'StarkNet', 'zkSync'],
     color: 'text-indigo-600 dark:text-indigo-400',
     bgColor: 'bg-indigo-100 dark:bg-indigo-900/30',
     hoverColor: 'hover:bg-indigo-50 dark:hover:bg-indigo-900/20'
@@ -116,7 +116,7 @@ const Explore: React.FC = () => {
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
-          Difficulty Score Breakdown
+          Friction Index Score Breakdown
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
           Explore different complexity levels and see what kind of analysis each score range provides. Click any card to view detailed insights.
