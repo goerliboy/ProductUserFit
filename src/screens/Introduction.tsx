@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAnalyzer } from '../context/AnalyzerContext';
+import { Search } from 'lucide-react';
 
 const Introduction: React.FC = () => {
   const navigate = useNavigate();
@@ -52,6 +53,14 @@ const Introduction: React.FC = () => {
             className="w-full px-8 py-3 text-lg font-medium rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20 text-white"
           >
             Start Analysis
+          </button>
+          
+          <button
+            onClick={() => navigate('/explore')}
+            className="w-full px-8 py-3 text-lg font-medium rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-500 transition-all duration-300 shadow-lg text-gray-700 dark:text-white border border-gray-300 dark:border-gray-500 flex items-center justify-center gap-2"
+          >
+            <Search size={20} />
+            I want to explore without analysis
           </button>
         </div>
       </div>

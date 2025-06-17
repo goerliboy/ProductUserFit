@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Introduction from './screens/Introduction';
 import Questionnaire from './screens/Questionnaire';
 import Results from './screens/Results';
+import Explore from './screens/Explore';
 import { AnalyzerProvider } from './context/AnalyzerContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
@@ -37,6 +38,7 @@ function App() {
               <Route path="/questions" element={<Questionnaire />} />
               <Route path="/results" element={<Results />} />
               <Route path="/results/:scoreRange" element={<Results />} />
+              <Route path="/explore" element={<Explore />} />
             </Routes>
           </div>
         </AnalyzerProvider>
