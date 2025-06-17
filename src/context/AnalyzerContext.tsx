@@ -44,9 +44,9 @@ export const AnalyzerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Return 0 if no questions answered to avoid division by zero
     if (answeredQuestions === 0) return 0;
     
-    // Calculate average score (1-10 scale)
+    // Calculate average score (1-10 scale) with full precision
     const score = totalWeight / answeredQuestions;
-    return Math.min(10, Math.max(1, parseFloat(score.toFixed(1)))); // Ensure score is between 1 and 10
+    return Math.min(10, Math.max(1, score)); // Ensure score is between 1 and 10, but keep full precision
   };
 
   const saveSubmission = async (score: number, answers: Record<number, string>): Promise<void> => {
