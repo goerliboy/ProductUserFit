@@ -15,12 +15,14 @@ const Questionnaire: React.FC = () => {
     answers,
     setAnswers,
     calculateScore,
+    saveSubmission,
   } = useAnalyzer();
   
   const [error, setError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const currentQuestion = getQuestionByIndex(currentQuestionIndex);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!answers[currentQuestionIndex]) {
       setError('Please select an answer before proceeding.');
       return;
@@ -29,10 +31,21 @@ const Questionnaire: React.FC = () => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Calculate final score and navigate to static results page
+      // Calculate final score and save submission
+      setIsSubmitting(true);
       const finalScore = calculateScore();
+      
+      try {
+        // Save the submission to database
+        await saveSubmission(finalScore, answers);
+      } catch (error) {
+        console.error('Failed to save submission:', error);
+        // Continue with navigation even if save fails
+      }
+      
       const scoreRange = getScoreRangeString(finalScore);
       navigate(`/results/${scoreRange}`);
+      setIsSubmitting(false);
     }
   };
 
@@ -89,7 +102,8 @@ const Questionnaire: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8">
           <button
             onClick={handlePrevious}
-            className="flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 text-gray-700 dark:text-white transition-colors"
+            disabled={isSubmitting}
+            className="flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 text-gray-700 dark:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ArrowLeft size={18} />
             Previous
@@ -97,11 +111,12 @@ const Questionnaire: React.FC = () => {
           
           <button
             onClick={handleNext}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 font-medium text-white"
+            disabled={isSubmitting}
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLastQuestion ? (
               <>
-                Calculate Score
+                {isSubmitting ? 'Calculating...' : 'Calculate Score'}
                 <Check size={18} />
               </>
             ) : (

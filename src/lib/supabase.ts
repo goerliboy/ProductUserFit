@@ -14,3 +14,11 @@ export interface FeedbackEntry {
   feedback_type: 'like' | 'dislike'
   created_at?: string
 }
+
+export interface QuestionnaireSubmission {
+  id?: string
+  user_id: string
+  submitted_at?: string
+  score: number
+  answers: Record<number, string>
+}

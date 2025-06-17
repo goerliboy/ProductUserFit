@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { QuestionType, questions } from '../data/questions';
 import { getInterpretation, getIdealUserProfile, getRecommendations } from '../data/interpretations';
+import { supabase, QuestionnaireSubmission } from '../lib/supabase';
 
 interface AnalyzerContextType {
   answers: Record<number, string>;
@@ -11,6 +12,7 @@ interface AnalyzerContextType {
   getQuestionByIndex: (index: number) => QuestionType | undefined;
   totalQuestions: number;
   resetAnalyzer: () => void;
+  saveSubmission: (score: number, answers: Record<number, string>) => Promise<void>;
 }
 
 const AnalyzerContext = createContext<AnalyzerContextType | undefined>(undefined);
@@ -47,6 +49,37 @@ export const AnalyzerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return Math.min(10, Math.max(1, parseFloat(score.toFixed(1)))); // Ensure score is between 1 and 10
   };
 
+  const saveSubmission = async (score: number, answers: Record<number, string>): Promise<void> => {
+    try {
+      // Generate or retrieve user ID (similar to feedback system)
+      let userId = localStorage.getItem('questionnaire-user-id');
+      if (!userId) {
+        userId = 'user-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
+        localStorage.setItem('questionnaire-user-id', userId);
+      }
+
+      const submission: QuestionnaireSubmission = {
+        user_id: userId,
+        score: score,
+        answers: answers
+      };
+
+      const { error } = await supabase
+        .from('questionnaire_submissions')
+        .insert([submission]);
+
+      if (error) {
+        console.error('Error saving questionnaire submission:', error);
+        // Don't throw error to avoid blocking user flow
+      } else {
+        console.log('Questionnaire submission saved successfully');
+      }
+    } catch (error) {
+      console.error('Error saving questionnaire submission:', error);
+      // Don't throw error to avoid blocking user flow
+    }
+  };
+
   const resetAnalyzer = () => {
     setAnswers({});
     setCurrentQuestionIndex(0);
@@ -63,6 +96,7 @@ export const AnalyzerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         getQuestionByIndex,
         totalQuestions,
         resetAnalyzer,
+        saveSubmission,
       }}
     >
       {children}
