@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAnalyzer, useAnalyzerResults } from '../context/AnalyzerContext';
 import { useTheme } from '../context/ThemeContext';
-import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown, Sliders } from 'lucide-react';
+import { ArrowLeft, Rotate3D as Rotate, Users, MessageSquare, Target, BookOpen, Shield, MessageSquareHeart, TrendingUp, BarChart3, ThumbsUp, ThumbsDown, Download, ChevronDown } from 'lucide-react';
 import { toPng } from 'html-to-image';
 import ReactMarkdown from 'react-markdown';
 import ScoreGauge from '../components/ScoreGauge';
 import RadarChart from '../components/RadarChart';
-import InteractiveScoreSlider from '../components/InteractiveScoreSlider';
 import { parseScoreRangeString, isValidScoreRange, getScoreRangeString } from '../utils/scoreUtils';
 import { supabase, FeedbackEntry } from '../lib/supabase';
 import { questions } from '../data/questions';
@@ -23,12 +22,8 @@ const Results: React.FC = () => {
   const isStaticPage = !!scoreRange;
   const scoreFromUrl = isStaticPage && scoreRange ? parseScoreRangeString(scoreRange) : undefined;
   
-  // Interactive slider state
-  const [showInteractiveSlider, setShowInteractiveSlider] = useState(false);
-  const [sliderScore, setSliderScore] = useState(scoreFromUrl || calculateScore());
-
-  // Use slider score when interactive slider is active, otherwise use original score
-  const effectiveScore = showInteractiveSlider ? sliderScore : (scoreFromUrl !== undefined ? scoreFromUrl : calculateScore());
+  // Use the original score calculation logic
+  const effectiveScore = scoreFromUrl !== undefined ? scoreFromUrl : calculateScore();
   
   const { 
     score: originalScore, 
@@ -223,10 +218,6 @@ const Results: React.FC = () => {
     }
   };
 
-  const handleSliderScoreChange = (newScore: number) => {
-    setSliderScore(newScore);
-  };
-
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
@@ -236,30 +227,6 @@ const Results: React.FC = () => {
       </div>
 
       <div className="max-w-4xl w-full space-y-8">
-        {/* Interactive Slider Toggle */}
-        <div className="text-center">
-          <button
-            onClick={() => setShowInteractiveSlider(!showInteractiveSlider)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 text-white font-medium shadow-lg hover:shadow-purple-500/20"
-          >
-            <Sliders size={20} />
-            {showInteractiveSlider ? 'Hide' : 'Explore'} Score Ranges
-          </button>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-            Discover different score analysis and insights for different score ranges.
-          </p>
-        </div>
-
-        {/* Interactive Score Slider */}
-        {showInteractiveSlider && (
-          <div className="border-2 border-dashed border-purple-300 dark:border-purple-700 rounded-xl p-6">
-            <InteractiveScoreSlider 
-              initialScore={effectiveScore} 
-              onScoreChange={handleSliderScoreChange}
-            />
-          </div>
-        )}
-
         {/* Score and Interpretation Section - Will be captured as image */}
         <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
