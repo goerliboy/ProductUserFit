@@ -33,7 +33,7 @@ const scoreRanges: ScoreRangeData[] = [
   },
   {
     range: '3.0-3.9',
-    label: 'Web3-leaning',
+    label: 'Crypto-leaning',
     description: 'Basic crypto concepts required',
     examples: ['Argent', 'Phantom', 'Farcaster'],
     color: 'text-yellow-600 dark:text-yellow-400',
