@@ -71,10 +71,10 @@ const Questionnaire: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 win98-gradient-text font-win98">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
           Diagnostic Questions
         </h1>
-        <p className="text-base text-win98-teal font-win98">
+        <p className="text-base text-win98-blue font-win98">
           Question {currentQuestionIndex + 1} of {totalQuestions}
         </p>
       </div>
@@ -134,7 +134,7 @@ const Questionnaire: React.FC = () => {
       </div>
 
       <div className="mt-6 text-center text-sm text-win98-gray-dark font-win98">
-        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-teal hover:underline">@zeroXserdar</a>
+        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   return (
     <div className="py-2">
       <div className="mb-4">
-        <span className="inline-block text-xs font-bold text-win98-teal bg-win98-gray-light win98-inset px-2 py-1 mb-2 font-win98">
+        <span className="inline-block text-xs font-bold text-win98-blue bg-win98-gray-light win98-inset px-2 py-1 mb-2 font-win98">
           {question.category}
         </span>
         <h2 className="text-base font-bold text-win98-black font-win98">{question.text}</h2>
@@ -27,7 +27,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             key={option.label}
             className={`p-3 cursor-pointer transition-all duration-200 font-win98 text-sm ${
               selectedAnswer === option.label
-                ? 'win98-inset win98-gradient-bg text-white'
+                ? 'win98-inset bg-win98-blue-light text-win98-black'
                 : 'win98-outset bg-win98-gray hover:bg-win98-gray-light'
             }`}
             onClick={() => onSelectAnswer(option.label)}
@@ -43,7 +43,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
               </div>
               <div className="flex-1">
                 <span className="font-bold mr-2">{option.label}.</span>
-                <span className={selectedAnswer === option.label ? 'text-white' : 'text-win98-black'}>
+                <span className="text-win98-black">
                   {option.text}
                 </span>
               </div>

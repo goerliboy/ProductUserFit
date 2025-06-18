@@ -9,10 +9,10 @@ const Introduction: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 win98-gradient-text font-win98">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
           Product-User Fit Framework
         </h1>
-        <p className="text-base text-win98-teal font-win98">
+        <p className="text-base text-win98-blue font-win98">
           Find out who actually gets your crypto product.
         </p>
       </div>
@@ -38,15 +38,15 @@ const Introduction: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-4 text-xs mb-8">
           <div className="win98-inset bg-win98-gray p-3">
-            <h3 className="font-bold text-win98-teal mb-2 font-win98">18 Questions</h3>
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">18 Questions</h3>
             <p className="text-win98-black font-win98">Measuring your score on Friction Index.</p>
           </div>
           <div className="win98-inset bg-win98-gray p-3">
-            <h3 className="font-bold text-win98-teal mb-2 font-win98">Detailed Analysis</h3>
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">Detailed Analysis</h3>
             <p className="text-win98-black font-win98">Get insights on your ideal user profile</p>
           </div>
           <div className="win98-inset bg-win98-gray p-3">
-            <h3 className="font-bold text-win98-teal mb-2 font-win98">Strategic Advice</h3>
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">Strategic Advice</h3>
             <p className="text-win98-black font-win98">Recommendations for UX, marketing & growth</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Introduction: React.FC = () => {
       </div>
 
       <div className="mt-6 text-center text-sm text-win98-gray-dark font-win98">
-        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-teal hover:underline">@zeroXserdar</a>
+        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
       </div>
     </div>
   );

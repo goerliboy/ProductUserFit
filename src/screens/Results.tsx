@@ -221,7 +221,7 @@ const Results: React.FC = () => {
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 win98-gradient-text font-win98">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
           Score Analysis and Insights
         </h1>
       </div>
@@ -286,25 +286,25 @@ const Results: React.FC = () => {
             <span>Ideal User Profile</span>
           </div>
           <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
-            <Users size={16} className="text-win98-teal" />
+            <Users size={16} className="text-win98-blue" />
             Ideal User Profile
           </h2>
           
           <div className="grid md:grid-cols-2 gap-4">
             <div className="win98-inset bg-win98-gray-light p-4">
-              <h3 className="font-bold text-win98-teal mb-2 font-win98 text-sm">Experience Level</h3>
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Experience Level</h3>
               <p className="text-sm text-win98-black font-win98">{idealUserProfile.experienceLevel}</p>
             </div>
             <div className="win98-inset bg-win98-gray-light p-4">
-              <h3 className="font-bold text-win98-teal mb-2 font-win98 text-sm">Knowledge Base</h3>
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Knowledge Base</h3>
               <p className="text-sm text-win98-black font-win98">{idealUserProfile.knowledgeBase}</p>
             </div>
             <div className="win98-inset bg-win98-gray-light p-4">
-              <h3 className="font-bold text-win98-teal mb-2 font-win98 text-sm">Behavior</h3>
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Behavior</h3>
               <p className="text-sm text-win98-black font-win98">{idealUserProfile.behavior}</p>
             </div>
             <div className="win98-inset bg-win98-gray-light p-4">
-              <h3 className="font-bold text-win98-teal mb-2 font-win98 text-sm">Expectations</h3>
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Expectations</h3>
               <p className="text-sm text-win98-black font-win98">{idealUserProfile.expectations}</p>
             </div>
           </div>
@@ -316,18 +316,18 @@ const Results: React.FC = () => {
             <span>Marketing Strategy</span>
           </div>
           <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
-            <MessageSquare size={16} className="text-win98-teal" />
+            <MessageSquare size={16} className="text-win98-blue" />
             Marketing Strategy
           </h2>
           
           <div className="space-y-6">
-            <div className="win98-inset win98-gradient-bg p-4">
-              <p className="text-white leading-relaxed font-win98 text-sm">{recommendations.marketing.main}</p>
+            <div className="win98-inset bg-win98-blue-light p-4">
+              <p className="text-win98-black leading-relaxed font-win98 text-sm">{recommendations.marketing.main}</p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h4 className="text-sm font-bold text-win98-teal font-win98 flex items-center gap-2">
+                <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
                   <Target size={14} />
                   Key Focus Areas
                 </h4>
@@ -347,7 +347,7 @@ const Results: React.FC = () => {
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <span className="w-1.5 h-1.5 win98-gradient-bg flex-shrink-0"></span>
+                            <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                             <span className="leading-relaxed">{area}</span>
                           </div>
                           
@@ -384,7 +384,7 @@ const Results: React.FC = () => {
               </div>
               
               <div className="space-y-3">
-                <h4 className="text-sm font-bold text-win98-teal font-win98 flex items-center gap-2">
+                <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
                   <BookOpen size={14} />
                   Content Strategy
                 </h4>
@@ -404,7 +404,7 @@ const Results: React.FC = () => {
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <span className="w-1.5 h-1.5 win98-gradient-bg flex-shrink-0"></span>
+                            <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                             <span className="leading-relaxed">{guide}</span>
                           </div>
                           
@@ -449,17 +449,17 @@ const Results: React.FC = () => {
             <span>Onboarding Principles</span>
           </div>
           <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
-            <Shield size={16} className="text-win98-teal" />
+            <Shield size={16} className="text-win98-blue" />
             Onboarding Principles
           </h2>
           
           <div className="space-y-6">
-            <div className="win98-inset win98-gradient-bg p-4">
-              <p className="text-white leading-relaxed font-win98 text-sm">{recommendations.onboarding.main}</p>
+            <div className="win98-inset bg-win98-blue-light p-4">
+              <p className="text-win98-black leading-relaxed font-win98 text-sm">{recommendations.onboarding.main}</p>
             </div>
             
             <div className="space-y-3">
-              <h4 className="text-sm font-bold text-win98-teal font-win98 flex items-center gap-2">
+              <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
                 <Shield size={14} />
                 Core Principles
               </h4>
@@ -479,7 +479,7 @@ const Results: React.FC = () => {
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 flex-1">
-                          <span className="w-1.5 h-1.5 win98-gradient-bg flex-shrink-0"></span>
+                          <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                           <span className="leading-relaxed">{principle}</span>
                         </div>
                         
@@ -523,7 +523,7 @@ const Results: React.FC = () => {
             <span>Growth Tactics</span>
           </div>
           <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
-            <TrendingUp size={16} className="text-win98-teal" />
+            <TrendingUp size={16} className="text-win98-blue" />
             Growth Tactics
           </h2>
           
@@ -544,7 +544,7 @@ const Results: React.FC = () => {
                   >
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="flex-shrink-0 w-5 h-5 win98-outset win98-gradient-bg flex items-center justify-center text-white text-xs font-bold">
+                        <div className="flex-shrink-0 w-5 h-5 win98-outset bg-win98-blue flex items-center justify-center text-white text-xs font-bold">
                           {index + 1}
                         </div>
                         <span className="text-sm text-win98-black leading-relaxed">{tactic}</span>
@@ -649,7 +649,7 @@ const Results: React.FC = () => {
 
         {/* Footer Credit */}
         <div className="text-center text-sm text-win98-gray-dark font-win98">
-          vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-teal hover:underline">@zeroXserdar</a>
+          vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
         </div>
       </div>
     </div>
