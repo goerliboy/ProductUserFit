@@ -58,13 +58,13 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
       {
         label: 'Category Scores',
         data: averages,
-        backgroundColor: 'rgba(0, 0, 255, 0.2)', // Windows 98 blue with transparency
-        borderColor: '#0000ff', // Windows 98 blue
+        backgroundColor: 'rgba(0, 128, 128, 0.2)', // Teal with transparency
+        borderColor: '#008080', // Teal
         borderWidth: 2,
-        pointBackgroundColor: '#0000ff',
+        pointBackgroundColor: '#008080',
         pointBorderColor: '#000000',
         pointHoverBackgroundColor: '#000000',
-        pointHoverBorderColor: '#0000ff',
+        pointHoverBorderColor: '#20b2aa',
       },
     ],
   };

@@ -36,11 +36,24 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = React.memo(({ score }) => {
       const scorePercentage = (score - 1) / 9;
       const scoreAngle = (Math.PI * 1.5) * scorePercentage;
       
-      // Draw score arc with Windows 98 blue
+      // Create gradient for the score arc
+      const gradient = ctx.createLinearGradient(
+        centerX - radius,
+        centerY - radius,
+        centerX + radius,
+        centerY + radius
+      );
+      
+      // Add color stops for teal gradient
+      gradient.addColorStop(0, '#008080');  // Teal
+      gradient.addColorStop(0.5, '#20b2aa');  // Light Sea Green
+      gradient.addColorStop(1, '#008080');  // Teal
+      
+      // Draw score arc with teal gradient
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * 0.75 + scoreAngle, false);
       ctx.lineWidth = thickness;
-      ctx.strokeStyle = '#0000ff';
+      ctx.strokeStyle = gradient;
       ctx.lineCap = 'butt'; // Square ends for Windows 98 style
       ctx.stroke();
       

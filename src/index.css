@@ -48,8 +48,8 @@
   }
   
   .win98-title-bar {
-    @apply bg-win98-title-bar text-white px-2 py-1 text-sm font-bold;
-    background: linear-gradient(90deg, #008080 0%, #004040 100%);
+    @apply text-white px-2 py-1 text-sm font-bold;
+    background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
   }
   
   .win98-progress-bar {
@@ -57,14 +57,25 @@
   }
   
   .win98-progress-fill {
-    @apply bg-win98-blue h-full;
+    @apply h-full;
     background: repeating-linear-gradient(
       45deg,
-      #0000ff,
-      #0000ff 2px,
-      #0080ff 2px,
-      #0080ff 4px
+      #008080,
+      #008080 2px,
+      #20b2aa 2px,
+      #20b2aa 4px
     );
+  }
+  
+  .win98-gradient-bg {
+    background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
+  }
+  
+  .win98-gradient-text {
+    background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
@@ -108,7 +119,7 @@
   appearance: none;
   width: 20px;
   height: 16px;
-  background: #c0c0c0;
+  background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
   border: 2px outset #c0c0c0;
   cursor: pointer;
   border-radius: 0;
@@ -121,7 +132,7 @@
 .win98-slider::-moz-range-thumb {
   width: 20px;
   height: 16px;
-  background: #c0c0c0;
+  background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
   border: 2px outset #c0c0c0;
   cursor: pointer;
   border-radius: 0;
@@ -140,7 +151,8 @@
 
 .win98-radio.selected::after {
   content: '';
-  @apply w-2 h-2 bg-win98-black rounded-full;
+  @apply w-2 h-2 rounded-full;
+  background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
 }
 
 /* Windows 98 Text Input */
@@ -164,7 +176,7 @@
 
   /* Preserve important visual elements with proper contrast */
   .bg-gradient-to-r {
-    background: linear-gradient(to right, #6366f1, #8b5cf6) !important;
+    background: linear-gradient(to right, #008080, #20b2aa) !important;
     color: white !important;
   }
 
@@ -174,18 +186,17 @@
     background-color: transparent !important;
   }
 
-  /* Force indigo colors for branding elements */
-  .text-indigo-600,
-  .text-indigo-500,
-  .text-indigo-400,
-  .text-indigo-300 {
-    color: #4f46e5 !important;
+  /* Force teal colors for branding elements */
+  .text-win98-teal,
+  .text-win98-teal-light,
+  .text-win98-teal-dark {
+    color: #008080 !important;
   }
 
   /* Ensure bullet points and icons are visible */
   .w-2.h-2.rounded-full,
   .w-1\.5.h-1\.5.rounded-full {
-    background-color: #4f46e5 !important;
+    background-color: #008080 !important;
   }
 
   /* Force white backgrounds for cards and sections */

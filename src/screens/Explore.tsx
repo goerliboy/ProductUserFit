@@ -18,7 +18,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Beginner-friendly',
     description: 'Anyone can use without crypto knowledge',
     examples: ['Revolut Crypto', 'Cash App Bitcoin', 'PayPal Crypto'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -27,7 +27,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Accessible',
     description: 'Basic crypto familiarity is useful',
     examples: ['Binance', 'Coinbase', 'Kraken', 'Gemini'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -36,7 +36,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Crypto-leaning',
     description: 'Basic crypto concepts required',
     examples: ['Argent', 'Phantom', 'Farcaster'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -45,7 +45,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Moderate',
     description: 'Moderate crypto experience needed',
     examples: ['MetaMask', 'OpenSea', 'ENS'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -54,7 +54,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'DeFi-focused',
     description: 'DeFi knowledge required',
     examples: ['Uniswap', 'PancakeSwap', 'Jupiter', '1inch'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -63,7 +63,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'High-friction',
     description: 'Advanced crypto expertise needed',
     examples: ['dYdX', 'Hyperliquid', 'Synthetix'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -72,7 +72,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Advanced',
     description: 'Deep DeFi/protocol knowledge',
     examples: ['Aave', 'Curve', 'MakerDAO', 'Lido'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -81,7 +81,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Infra-heavy',
     description: 'Technical infra focus',
     examples: ['Alchemy', 'Chainlink', 'Etherscan', 'Dune'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -90,7 +90,7 @@ const scoreRanges: ScoreRangeData[] = [
     label: 'Protocol-layer',
     description: 'Protocol development expertise',
     examples: ['Arbitrum', 'Solana', 'StarkNet', 'zkSync'],
-    color: 'text-win98-blue',
+    color: 'text-win98-teal',
     bgColor: 'bg-win98-gray-light',
     hoverColor: 'hover:bg-win98-gray-light'
   },
@@ -115,7 +115,7 @@ const Explore: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 win98-gradient-text font-win98">
           Score Analysis & Insights
         </h1>
         <p className="text-base text-win98-gray-dark max-w-2xl mx-auto font-win98">
@@ -140,7 +140,7 @@ const Explore: React.FC = () => {
                   <span className="text-lg font-bold text-win98-black font-win98">
                     {scoreRange.range}
                   </span>
-                  <div className="w-3 h-3 bg-win98-blue"></div>
+                  <div className="w-3 h-3 win98-gradient-bg"></div>
                 </div>
                 <ExternalLink size={14} className="text-win98-gray-dark" />
               </div>
@@ -173,7 +173,7 @@ const Explore: React.FC = () => {
       </div>
 
       <div className="mt-8 text-center text-sm text-win98-gray-dark font-win98">
-        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
+        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-teal hover:underline">@zeroXserdar</a>
       </div>
     </div>
   );
