@@ -221,34 +221,40 @@ const Results: React.FC = () => {
   return (
     <div className="flex flex-col items-center mb-16">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
           Score Analysis and Insights
         </h1>
       </div>
 
       <div className="max-w-4xl w-full space-y-8">
         {/* Score and Interpretation Section - Will be captured as image */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={scoreRef}>
+        <div className="win98-window p-6" ref={scoreRef}>
+          <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+            <span>Friction Index Score</span>
+          </div>
           <div className="flex flex-col md:flex-row md:items-center md:gap-8">
             <div className="w-48 h-48 mb-6 md:mb-0 flex-shrink-0">
               <ScoreGauge score={effectiveScore} />
             </div>
             <div className="flex-1">
-              <p className="text-gray-600 dark:text-gray-200 text-center md:text-left">{interpretation}</p>
+              <p className="text-win98-black text-center md:text-left font-win98 text-sm leading-relaxed">{interpretation}</p>
             </div>
           </div>
         </div>
 
         {/* Radar Chart Section - Will be captured as image */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-8 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50" ref={radarRef}>
+        <div className="win98-window p-8" ref={radarRef}>
+          <div className="win98-title-bar mb-4 -mx-8 -mt-8">
+            <span>Category Analysis</span>
+          </div>
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30">
-                <BarChart3 size={24} className="text-indigo-600 dark:text-indigo-400" />
+              <div className="win98-outset p-2 bg-win98-gray">
+                <BarChart3 size={20} className="text-win98-black" />
               </div>
-              <h2 className="text-2xl font-bold text-text-primary dark:text-white">Category Analysis</h2>
+              <h2 className="text-xl font-bold text-win98-black font-win98">Category Analysis</h2>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm max-w-2xl mx-auto">
+            <p className="text-win98-gray-dark text-xs max-w-2xl mx-auto font-win98">
               {isStaticPage && Object.keys(answers).length === 0 
                 ? `Sample breakdown showing typical complexity patterns for products in the ${currentScoreRange} range`
                 : 'Visual breakdown of your product\'s complexity across different crypto knowledge domains'
@@ -257,22 +263,15 @@ const Results: React.FC = () => {
           </div>
           
           <div className="relative">
-            {/* Decorative background elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/10 dark:to-purple-900/10 rounded-2xl"></div>
-            <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-200/20 to-purple-200/20 dark:from-indigo-700/20 dark:to-purple-700/20 rounded-full blur-xl"></div>
-            <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-br from-purple-200/20 to-indigo-200/20 dark:from-purple-700/20 dark:to-indigo-700/20 rounded-full blur-xl"></div>
-            
             {/* Chart container */}
-            <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600/50 shadow-inner">
-              <div className="w-full max-w-2xl mx-auto aspect-square">
-                <RadarChart answers={displayAnswers} />
-              </div>
+            <div className="w-full max-w-2xl mx-auto aspect-square">
+              <RadarChart answers={displayAnswers} />
             </div>
           </div>
           
           {/* Chart legend/description */}
           <div className="mt-6 text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+            <p className="text-xs text-win98-gray-dark font-win98">
               Higher values indicate greater crypto expertise required from users
               {isStaticPage && Object.keys(answers).length === 0 && (
                 <span className="block mt-1">Sample data shown for demonstration purposes</span>
@@ -282,51 +281,57 @@ const Results: React.FC = () => {
         </div>
 
         {/* Ideal User Profile Section - Will be rendered as text in PDF */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={userProfileRef}>
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <Users size={20} className="text-indigo-500 dark:text-indigo-400" />
+        <div className="win98-window p-6" ref={userProfileRef}>
+          <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+            <span>Ideal User Profile</span>
+          </div>
+          <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
+            <Users size={16} className="text-win98-blue" />
             Ideal User Profile
           </h2>
           
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-200">
-              <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Experience Level</h3>
-              <p className="text-base text-gray-600 dark:text-gray-200">{idealUserProfile.experienceLevel}</p>
+            <div className="win98-inset bg-win98-gray-light p-4">
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Experience Level</h3>
+              <p className="text-sm text-win98-black font-win98">{idealUserProfile.experienceLevel}</p>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-200">
-              <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Knowledge Base</h3>
-              <p className="text-base text-gray-600 dark:text-gray-200">{idealUserProfile.knowledgeBase}</p>
+            <div className="win98-inset bg-win98-gray-light p-4">
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Knowledge Base</h3>
+              <p className="text-sm text-win98-black font-win98">{idealUserProfile.knowledgeBase}</p>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-200">
-              <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Behavior</h3>
-              <p className="text-base text-gray-600 dark:text-gray-200">{idealUserProfile.behavior}</p>
+            <div className="win98-inset bg-win98-gray-light p-4">
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Behavior</h3>
+              <p className="text-sm text-win98-black font-win98">{idealUserProfile.behavior}</p>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-200">
-              <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Expectations</h3>
-              <p className="text-base text-gray-600 dark:text-gray-200">{idealUserProfile.expectations}</p>
+            <div className="win98-inset bg-win98-gray-light p-4">
+              <h3 className="font-bold text-win98-blue mb-2 font-win98 text-sm">Expectations</h3>
+              <p className="text-sm text-win98-black font-win98">{idealUserProfile.expectations}</p>
             </div>
           </div>
         </div>
 
         {/* Marketing Strategy Section - Will be rendered as text in PDF */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={marketingRef}>
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <MessageSquare size={20} className="text-indigo-500 dark:text-indigo-400" />
+        <div className="win98-window p-6" ref={marketingRef}>
+          <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+            <span>Marketing Strategy</span>
+          </div>
+          <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
+            <MessageSquare size={16} className="text-win98-blue" />
             Marketing Strategy
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-4 rounded-lg border-l-4 border-indigo-500">
-              <p className="text-gray-700 dark:text-gray-200 leading-relaxed">{recommendations.marketing.main}</p>
+            <div className="win98-inset bg-win98-blue-light p-4">
+              <p className="text-win98-black leading-relaxed font-win98 text-sm">{recommendations.marketing.main}</p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
-                <h4 className="text-base font-semibold text-indigo-600 dark:text-indigo-300 flex items-center gap-2">
-                  <Target size={16} />
+                <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
+                  <Target size={14} />
                   Key Focus Areas
                 </h4>
-                <div className="bg-white dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+                <div className="win98-inset bg-white">
                   {recommendations.marketing.keyAreas.map((area, index) => {
                     const feedbackKey = `marketing.keyAreas-${index}`;
                     const currentFeedback = userFeedback[feedbackKey];
@@ -334,41 +339,41 @@ const Results: React.FC = () => {
                     return (
                       <div 
                         key={index} 
-                        className={`py-3 px-4 text-base text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                        className={`py-2 px-3 text-sm text-win98-black border-b border-win98-gray-dark last:border-b-0 ${
                           index % 2 === 0 
-                            ? 'bg-gray-50/50 dark:bg-gray-700/20' 
-                            : 'bg-white dark:bg-gray-800/20'
-                        } hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors duration-200`}
+                            ? 'bg-win98-gray-light' 
+                            : 'bg-white'
+                        } font-win98`}
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
+                            <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                             <span className="leading-relaxed">{area}</span>
                           </div>
                           
                           {/* Feedback buttons */}
-                          <div className="flex items-center gap-2 flex-shrink-0 no-print">
+                          <div className="flex items-center gap-1 flex-shrink-0 no-print">
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'like', area)}
-                              className={`p-2 rounded-lg transition-all duration-200 ${
+                              className={`win98-button p-1 ${
                                 currentFeedback === 'like'
-                                  ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                                  : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
+                                  ? 'win98-pressed'
+                                  : ''
                               }`}
                               title="This is helpful"
                             >
-                              <ThumbsUp size={16} />
+                              <ThumbsUp size={12} />
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.keyAreas', index, 'dislike', area)}
-                              className={`p-2 rounded-lg transition-all duration-200 ${
+                              className={`win98-button p-1 ${
                                 currentFeedback === 'dislike'
-                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                                  : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                                  ? 'win98-pressed'
+                                  : ''
                               }`}
                               title="This is not helpful"
                             >
-                              <ThumbsDown size={16} />
+                              <ThumbsDown size={12} />
                             </button>
                           </div>
                         </div>
@@ -379,11 +384,11 @@ const Results: React.FC = () => {
               </div>
               
               <div className="space-y-3">
-                <h4 className="text-base font-semibold text-indigo-600 dark:text-indigo-300 flex items-center gap-2">
-                  <BookOpen size={16} />
+                <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
+                  <BookOpen size={14} />
                   Content Strategy
                 </h4>
-                <div className="bg-white dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+                <div className="win98-inset bg-white">
                   {recommendations.marketing.contentGuide.map((guide, index) => {
                     const feedbackKey = `marketing.contentGuide-${index}`;
                     const currentFeedback = userFeedback[feedbackKey];
@@ -391,41 +396,41 @@ const Results: React.FC = () => {
                     return (
                       <div 
                         key={index} 
-                        className={`py-3 px-4 text-base text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                        className={`py-2 px-3 text-sm text-win98-black border-b border-win98-gray-dark last:border-b-0 ${
                           index % 2 === 0 
-                            ? 'bg-gray-50/50 dark:bg-gray-700/20' 
-                            : 'bg-white dark:bg-gray-800/20'
-                        } hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors duration-200`}
+                            ? 'bg-win98-gray-light' 
+                            : 'bg-white'
+                        } font-win98`}
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3 flex-1">
-                            <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
+                            <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                             <span className="leading-relaxed">{guide}</span>
                           </div>
                           
                           {/* Feedback buttons */}
-                          <div className="flex items-center gap-2 flex-shrink-0 no-print">
+                          <div className="flex items-center gap-1 flex-shrink-0 no-print">
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'like', guide)}
-                              className={`p-2 rounded-lg transition-all duration-200 ${
+                              className={`win98-button p-1 ${
                                 currentFeedback === 'like'
-                                  ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                                  : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
+                                  ? 'win98-pressed'
+                                  : ''
                               }`}
                               title="This is helpful"
                             >
-                              <ThumbsUp size={16} />
+                              <ThumbsUp size={12} />
                             </button>
                             <button
                               onClick={() => handleFeedback('marketing.contentGuide', index, 'dislike', guide)}
-                              className={`p-2 rounded-lg transition-all duration-200 ${
+                              className={`win98-button p-1 ${
                                 currentFeedback === 'dislike'
-                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                                  : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                                  ? 'win98-pressed'
+                                  : ''
                               }`}
                               title="This is not helpful"
                             >
-                              <ThumbsDown size={16} />
+                              <ThumbsDown size={12} />
                             </button>
                           </div>
                         </div>
@@ -439,23 +444,26 @@ const Results: React.FC = () => {
         </div>
 
         {/* Onboarding Principles Section - Will be rendered as text in PDF */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={onboardingRef}>
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <Shield size={20} className="text-indigo-500 dark:text-indigo-400" />
+        <div className="win98-window p-6" ref={onboardingRef}>
+          <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+            <span>Onboarding Principles</span>
+          </div>
+          <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
+            <Shield size={16} className="text-win98-blue" />
             Onboarding Principles
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-4 rounded-lg border-l-4 border-indigo-500">
-              <p className="text-gray-700 dark:text-gray-200 leading-relaxed">{recommendations.onboarding.main}</p>
+            <div className="win98-inset bg-win98-blue-light p-4">
+              <p className="text-win98-black leading-relaxed font-win98 text-sm">{recommendations.onboarding.main}</p>
             </div>
             
             <div className="space-y-3">
-              <h4 className="text-base font-semibold text-indigo-600 dark:text-indigo-300 flex items-center gap-2">
-                <Shield size={16} />
+              <h4 className="text-sm font-bold text-win98-blue font-win98 flex items-center gap-2">
+                <Shield size={14} />
                 Core Principles
               </h4>
-              <div className="bg-white dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+              <div className="win98-inset bg-white">
                 {recommendations.onboarding.principles.map((principle, index) => {
                   const feedbackKey = `onboarding.principles-${index}`;
                   const currentFeedback = userFeedback[feedbackKey];
@@ -463,41 +471,41 @@ const Results: React.FC = () => {
                   return (
                     <div 
                       key={index} 
-                      className={`py-3 px-4 text-base text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                      className={`py-2 px-3 text-sm text-win98-black border-b border-win98-gray-dark last:border-b-0 ${
                         index % 2 === 0 
-                          ? 'bg-gray-50/50 dark:bg-gray-700/20' 
-                          : 'bg-white dark:bg-gray-800/20'
-                      } hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors duration-200`}
+                          ? 'bg-win98-gray-light' 
+                          : 'bg-white'
+                      } font-win98`}
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3 flex-1">
-                          <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 flex-shrink-0"></span>
+                          <span className="w-1.5 h-1.5 bg-win98-blue flex-shrink-0"></span>
                           <span className="leading-relaxed">{principle}</span>
                         </div>
                         
                         {/* Feedback buttons */}
-                        <div className="flex items-center gap-2 flex-shrink-0 no-print">
+                        <div className="flex items-center gap-1 flex-shrink-0 no-print">
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'like', principle)}
-                            className={`p-2 rounded-lg transition-all duration-200 ${
+                            className={`win98-button p-1 ${
                               currentFeedback === 'like'
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                                : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
+                                ? 'win98-pressed'
+                                : ''
                             }`}
                             title="This is helpful"
                           >
-                            <ThumbsUp size={16} />
+                            <ThumbsUp size={12} />
                           </button>
                           <button
                             onClick={() => handleFeedback('onboarding.principles', index, 'dislike', principle)}
-                            className={`p-2 rounded-lg transition-all duration-200 ${
+                            className={`win98-button p-1 ${
                               currentFeedback === 'dislike'
-                                ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                                : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                                ? 'win98-pressed'
+                                : ''
                             }`}
                             title="This is not helpful"
                           >
-                            <ThumbsDown size={16} />
+                            <ThumbsDown size={12} />
                           </button>
                         </div>
                       </div>
@@ -510,14 +518,17 @@ const Results: React.FC = () => {
         </div>
 
         {/* Growth Tactics Section - Will be rendered as text in PDF */}
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg" ref={growthRef}>
-          <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-text-primary dark:text-white">
-            <TrendingUp size={20} className="text-indigo-500 dark:text-indigo-400" />
+        <div className="win98-window p-6" ref={growthRef}>
+          <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+            <span>Growth Tactics</span>
+          </div>
+          <h2 className="text-lg font-bold mb-6 flex items-center gap-2 text-win98-black font-win98">
+            <TrendingUp size={16} className="text-win98-blue" />
             Growth Tactics
           </h2>
           
           <div className="space-y-3">
-            <div className="bg-white dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+            <div className="win98-inset bg-white">
               {recommendations.growthTactics.map((tactic, index) => {
                 const feedbackKey = `growthTactics-${index}`;
                 const currentFeedback = userFeedback[feedbackKey];
@@ -525,43 +536,43 @@ const Results: React.FC = () => {
                 return (
                   <div 
                     key={index} 
-                    className={`py-4 px-5 border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
+                    className={`py-3 px-4 border-b border-win98-gray-dark last:border-b-0 ${
                       index % 2 === 0 
-                        ? 'bg-gray-50/50 dark:bg-gray-700/20' 
-                        : 'bg-white dark:bg-gray-800/20'
-                    } hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-200`}
+                        ? 'bg-win98-gray-light' 
+                        : 'bg-white'
+                    } font-win98`}
                   >
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4 flex-1">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">
+                        <div className="flex-shrink-0 w-5 h-5 win98-outset bg-win98-blue flex items-center justify-center text-white text-xs font-bold">
                           {index + 1}
                         </div>
-                        <span className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">{tactic}</span>
+                        <span className="text-sm text-win98-black leading-relaxed">{tactic}</span>
                       </div>
                       
                       {/* Feedback buttons */}
-                      <div className="flex items-center gap-2 flex-shrink-0 no-print">
+                      <div className="flex items-center gap-1 flex-shrink-0 no-print">
                         <button
                           onClick={() => handleFeedback('growthTactics', index, 'like', tactic)}
-                          className={`p-2 rounded-lg transition-all duration-200 ${
+                          className={`win98-button p-1 ${
                             currentFeedback === 'like'
-                              ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                              : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-green-50 dark:hover:bg-green-900/20 hover:text-green-600 dark:hover:text-green-400'
+                              ? 'win98-pressed'
+                              : ''
                           }`}
                           title="This is helpful"
                         >
-                          <ThumbsUp size={16} />
+                          <ThumbsUp size={12} />
                         </button>
                         <button
                           onClick={() => handleFeedback('growthTactics', index, 'dislike', tactic)}
-                          className={`p-2 rounded-lg transition-all duration-200 ${
+                          className={`win98-button p-1 ${
                             currentFeedback === 'dislike'
-                              ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                              : 'bg-gray-100 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                              ? 'win98-pressed'
+                              : ''
                           }`}
                           title="This is not helpful"
                         >
-                          <ThumbsDown size={16} />
+                          <ThumbsDown size={12} />
                         </button>
                       </div>
                     </div>
@@ -578,18 +589,18 @@ const Results: React.FC = () => {
           {!isStaticPage && (
             <button
               onClick={() => navigate('/questions')}
-              className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 text-gray-700 dark:text-white transition-colors"
+              className="win98-button flex items-center justify-center gap-2 text-sm"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={16} />
               Back to Questions
             </button>
           )}
           
           <button
             onClick={handleReset}
-            className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 text-white font-medium"
+            className="win98-button flex items-center justify-center gap-2 text-sm font-bold"
           >
-            <Rotate size={18} />
+            <Rotate size={16} />
             Start New Analysis
           </button>
 
@@ -598,26 +609,26 @@ const Results: React.FC = () => {
             <button
               onClick={() => setShowExportOptions(!showExportOptions)}
               disabled={isExporting}
-              className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-400 disabled:bg-indigo-400 disabled:cursor-not-allowed transition-all duration-300 text-white font-medium"
+              className="win98-button flex items-center justify-center gap-2 text-sm font-bold disabled:opacity-50"
             >
-              <Download size={18} />
+              <Download size={16} />
               {isExporting ? 'Exporting...' : 'Export Report'}
-              <ChevronDown size={16} className={`transition-transform ${showExportOptions ? 'rotate-180' : ''}`} />
+              <ChevronDown size={14} className={`transition-transform ${showExportOptions ? 'rotate-180' : ''}`} />
             </button>
             
             {showExportOptions && (
-              <div className="absolute top-full mt-2 right-0 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 min-w-[160px] z-10">
+              <div className="absolute top-full mt-2 right-0 win98-window min-w-[160px] z-10">
                 <button
                   onClick={handleExportPDF}
                   disabled={isExporting}
-                  className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-t-lg transition-colors text-gray-700 dark:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full win98-button text-left text-sm disabled:opacity-50"
                 >
                   Export as PDF
                 </button>
                 <button
                   onClick={handleExportCSV}
                   disabled={isExporting}
-                  className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 rounded-b-lg transition-colors text-gray-700 dark:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full win98-button text-left text-sm disabled:opacity-50"
                 >
                   Export as CSV
                 </button>
@@ -629,16 +640,16 @@ const Results: React.FC = () => {
             href="https://x.com/messages/compose?recipient_id=1327720803044093955"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-2 rounded-lg bg-blue-500 dark:bg-blue-500/40 hover:bg-blue-400 dark:hover:bg-blue-400/50 text-gray-100 dark:text-gray-100 transition-colors font-medium"
+            className="win98-button flex items-center justify-center gap-2 text-sm font-bold"
           >
-            <MessageSquareHeart size={18} />
+            <MessageSquareHeart size={16} />
             Send Feedback
           </a>
         </div>
 
         {/* Footer Credit */}
-        <div className="text-center text-lg text-gray-500 dark:text-gray-400">
-          vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold hover:text-indigo-500 transition-colors">@zeroXserdar</a>
+        <div className="text-center text-sm text-win98-gray-dark font-win98">
+          vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
         </div>
       </div>
     </div>

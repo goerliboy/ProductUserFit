@@ -25,25 +25,6 @@ interface RadarChartProps {
 }
 
 const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
-  const [isDarkMode, setIsDarkMode] = useState(document.documentElement.classList.contains('dark'));
-
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          setIsDarkMode(document.documentElement.classList.contains('dark'));
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   // Group questions by category and calculate average scores
   const categoryScores = Object.entries(answers).reduce((acc, [questionId, answer]) => {
     const question = questions[parseInt(questionId)];
@@ -77,13 +58,13 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
       {
         label: 'Category Scores',
         data: averages,
-        backgroundColor: isDarkMode ? 'rgba(99, 102, 241, 0.2)' : 'rgba(79, 70, 229, 0.1)',
-        borderColor: isDarkMode ? 'rgba(99, 102, 241, 1)' : 'rgba(79, 70, 229, 1)',
+        backgroundColor: 'rgba(0, 0, 255, 0.2)', // Windows 98 blue with transparency
+        borderColor: '#0000ff', // Windows 98 blue
         borderWidth: 2,
-        pointBackgroundColor: isDarkMode ? 'rgba(99, 102, 241, 1)' : 'rgba(79, 70, 229, 1)',
-        pointBorderColor: isDarkMode ? '#1f2937' : '#ffffff',
-        pointHoverBackgroundColor: isDarkMode ? '#1f2937' : '#ffffff',
-        pointHoverBorderColor: isDarkMode ? 'rgba(99, 102, 241, 1)' : 'rgba(79, 70, 229, 1)',
+        pointBackgroundColor: '#0000ff',
+        pointBorderColor: '#000000',
+        pointHoverBackgroundColor: '#000000',
+        pointHoverBorderColor: '#0000ff',
       },
     ],
   };
@@ -92,23 +73,25 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
     scales: {
       r: {
         angleLines: {
-          color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
+          color: '#808080', // Windows 98 gray
         },
         grid: {
-          color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)',
+          color: '#808080', // Windows 98 gray
         },
         pointLabels: {
-          color: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.8)',
+          color: '#000000', // Black text
           font: {
-            size: 12,
-            weight: '500',
+            family: '"MS Sans Serif", Tahoma, Arial, sans-serif',
+            size: 11,
+            weight: 'normal',
           },
         },
         ticks: {
-          color: isDarkMode ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+          color: '#404040', // Dark gray
           backdropColor: 'transparent',
           font: {
-            size: 10,
+            family: '"MS Sans Serif", Tahoma, Arial, sans-serif',
+            size: 9,
           },
         },
         suggestedMin: 0,
@@ -120,19 +103,27 @@ const RadarChart: React.FC<RadarChartProps> = ({ answers }) => {
         display: false,
       },
       tooltip: {
-        backgroundColor: isDarkMode ? 'rgba(31, 41, 55, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-        titleColor: isDarkMode ? '#ffffff' : '#000000',
-        bodyColor: isDarkMode ? '#ffffff' : '#000000',
-        padding: 12,
+        backgroundColor: '#c0c0c0',
+        titleColor: '#000000',
+        bodyColor: '#000000',
+        borderColor: '#808080',
+        borderWidth: 2,
+        padding: 8,
         displayColors: false,
-        borderColor: isDarkMode ? 'rgba(99, 102, 241, 0.3)' : 'rgba(79, 70, 229, 0.3)',
-        borderWidth: 1,
+        titleFont: {
+          family: '"MS Sans Serif", Tahoma, Arial, sans-serif',
+          size: 11,
+        },
+        bodyFont: {
+          family: '"MS Sans Serif", Tahoma, Arial, sans-serif',
+          size: 11,
+        },
       },
     },
   };
 
   return (
-    <div className="w-full h-full min-h-[300px]">
+    <div className="w-full h-full min-h-[300px] win98-inset bg-white p-4">
       <Radar data={data} options={options} />
     </div>
   );

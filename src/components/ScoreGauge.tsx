@@ -8,7 +8,6 @@ interface ScoreGaugeProps {
 const ScoreGauge: React.FC<ScoreGaugeProps> = React.memo(({ score }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
-  const isDarkMode = theme === 'dark';
 
   useEffect(() => {
     const renderGauge = () => {
@@ -26,47 +25,35 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = React.memo(({ score }) => {
       
       ctx.clearRect(0, 0, size, size);
       
-      // Draw background arc (gray)
+      // Draw background arc (Windows 98 gray)
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * 2.25, false);
       ctx.lineWidth = thickness;
-      ctx.strokeStyle = isDarkMode ? 'rgba(75, 85, 99, 0.3)' : 'rgba(229, 231, 235, 0.8)';
+      ctx.strokeStyle = '#808080';
       ctx.stroke();
       
       // Calculate score percentage and angle
       const scorePercentage = (score - 1) / 9;
       const scoreAngle = (Math.PI * 1.5) * scorePercentage;
       
-      // Create gradient for the score arc
-      const gradient = ctx.createLinearGradient(
-        centerX - radius,
-        centerY - radius,
-        centerX + radius,
-        centerY + radius
-      );
-      
-      // Add color stops for gradient (green to red)
-      gradient.addColorStop(0, 'rgb(34, 197, 94)');  // Green
-      gradient.addColorStop(1, 'rgb(239, 68, 68)');  // Red
-      
-      // Draw score arc with gradient
+      // Draw score arc with Windows 98 blue
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * 0.75 + scoreAngle, false);
       ctx.lineWidth = thickness;
-      ctx.strokeStyle = gradient;
-      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#0000ff';
+      ctx.lineCap = 'butt'; // Square ends for Windows 98 style
       ctx.stroke();
       
       // Draw score text
-      ctx.font = `bold ${size * 0.2}px sans-serif`;
-      ctx.fillStyle = isDarkMode ? 'white' : '#111827';
+      ctx.font = `bold ${size * 0.2}px "MS Sans Serif", Tahoma, Arial, sans-serif`;
+      ctx.fillStyle = '#000000';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(score.toString(), centerX, centerY - 10);
       
       // Draw "out of 10" text
-      ctx.font = `${size * 0.08}px sans-serif`;
-      ctx.fillStyle = isDarkMode ? '#9CA3AF' : '#6B7280';
+      ctx.font = `${size * 0.08}px "MS Sans Serif", Tahoma, Arial, sans-serif`;
+      ctx.fillStyle = '#404040';
       ctx.fillText('out of 10', centerX, centerY + 20);
     };
 
@@ -75,10 +62,10 @@ const ScoreGauge: React.FC<ScoreGaugeProps> = React.memo(({ score }) => {
     // Debounce the re-render on theme changes
     const debounceRender = setTimeout(renderGauge, 100);
     return () => clearTimeout(debounceRender);
-  }, [score, isDarkMode]);
+  }, [score, theme]);
   
   return (
-    <div className="flex items-center justify-center w-full h-full">
+    <div className="flex items-center justify-center w-full h-full win98-inset bg-white">
       <canvas 
         ref={canvasRef} 
         width={200} 

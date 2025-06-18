@@ -9,17 +9,21 @@ const Introduction: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
           Product-User Fit Framework
         </h1>
-        <p className="text-lg italic text-indigo-600 dark:text-indigo-300">
+        <p className="text-base text-win98-blue font-win98">
           Find out who actually gets your crypto product.
         </p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 md:p-8 shadow-lg dark:backdrop-blur-sm max-w-2xl">
-        <p className="text-base mb-6 leading-relaxed text-gray-600 dark:text-white">
-          Introducing <span className="font-semibold">Product-User Fit Framework</span>, a tool that helps you understand how crypto-savvy your users must be to understand and use your crypto product.
+      <div className="win98-window p-6 md:p-8 max-w-2xl">
+        <div className="win98-title-bar mb-4 -mx-6 -mt-6">
+          <span>Product-User Fit Framework - Introduction</span>
+        </div>
+        
+        <p className="text-sm mb-6 leading-relaxed text-win98-black font-win98">
+          Introducing <span className="font-bold">Product-User Fit Framework</span>, a tool that helps you understand how crypto-savvy your users must be to understand and use your crypto product.
           <br /><br />
           <span className="font-bold">1</span> means that anyone without crypto experience can use your product.<br />
           <span className="font-bold">10</span> means that only users with deep crypto expertise can use your product.
@@ -29,44 +33,44 @@ const Introduction: React.FC = () => {
           • Understand your true user profile (not who you <em>hope</em> will use it, but who <em>can</em>).<br />
           • Match your messaging to your users' crypto literacy level.
           <br /><br />
-          <span className="font-semibold">Spoiler Alert:</span> No, you're not onboarding the next billion users. Yet.
+          <span className="font-bold">Spoiler Alert:</span> No, you're not onboarding the next billion users. Yet.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-4 text-sm mb-8">
-          <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-            <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">18 Questions</h3>
-            <p className="text-gray-600 dark:text-white">Measuring your score on Friction Index.</p>
+        <div className="grid md:grid-cols-3 gap-4 text-xs mb-8">
+          <div className="win98-inset bg-win98-gray p-3">
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">18 Questions</h3>
+            <p className="text-win98-black font-win98">Measuring your score on Friction Index.</p>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-            <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Detailed Analysis</h3>
-            <p className="text-gray-600 dark:text-white">Get insights on your ideal user profile</p>
+          <div className="win98-inset bg-win98-gray p-3">
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">Detailed Analysis</h3>
+            <p className="text-win98-black font-win98">Get insights on your ideal user profile</p>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
-            <h3 className="font-semibold text-indigo-600 dark:text-indigo-300 mb-2">Strategic Advice</h3>
-            <p className="text-gray-600 dark:text-white">Recommendations for UX, marketing & growth</p>
+          <div className="win98-inset bg-win98-gray p-3">
+            <h3 className="font-bold text-win98-blue mb-2 font-win98">Strategic Advice</h3>
+            <p className="text-win98-black font-win98">Recommendations for UX, marketing & growth</p>
           </div>
         </div>
 
         <div className="space-y-3">
           <button
             onClick={() => navigate('/questions')}
-            className="w-full px-8 py-3 text-lg font-medium rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 shadow-lg hover:shadow-indigo-500/20 text-white"
+            className="w-full win98-button text-sm font-bold py-3"
           >
             Start Analysis
           </button>
           
           <button
             onClick={() => navigate('/explore')}
-            className="w-full px-8 py-3 text-lg font-medium rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 hover:from-gray-200 hover:to-gray-300 dark:hover:from-gray-600 dark:hover:to-gray-500 transition-all duration-300 shadow-lg text-gray-700 dark:text-white border border-gray-300 dark:border-gray-500 flex items-center justify-center gap-2"
+            className="w-full win98-button text-sm font-bold py-3 flex items-center justify-center gap-2"
           >
-            <Search size={20} />
+            <Search size={16} />
             I want to explore without analysis
           </button>
         </div>
       </div>
 
-      <div className="mt-6 text-center text-lg text-gray-500 dark:text-gray-400">
-        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold hover:text-indigo-500 transition-colors">@zeroXserdar</a>
+      <div className="mt-6 text-center text-sm text-win98-gray-dark font-win98">
+        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
       </div>
     </div>
   );

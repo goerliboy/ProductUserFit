@@ -4,43 +4,148 @@
 
 @layer base {
   body {
-    @apply antialiased;
+    @apply antialiased font-win98 bg-win98-gray text-win98-black;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  
+  * {
+    box-sizing: border-box;
   }
 }
 
-/* Custom slider styles */
-.slider-thumb::-webkit-slider-thumb {
+/* Windows 98 Button Styles */
+@layer components {
+  .win98-button {
+    @apply bg-win98-button-face border-2 border-win98-button-highlight border-r-win98-button-shadow border-b-win98-button-shadow;
+    @apply px-4 py-2 text-win98-black font-win98 text-sm cursor-pointer;
+    @apply hover:bg-win98-button-light active:border-win98-button-shadow active:border-r-win98-button-highlight active:border-b-win98-button-highlight;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  }
+  
+  .win98-button:active {
+    box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #808080;
+  }
+  
+  .win98-button:disabled {
+    @apply text-win98-gray-dark cursor-not-allowed;
+    background-color: #c0c0c0;
+  }
+  
+  .win98-window {
+    @apply bg-win98-window-frame border-2 border-win98-button-highlight border-r-win98-button-shadow border-b-win98-button-shadow;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080, 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .win98-inset {
+    @apply border-2 border-win98-button-shadow border-r-win98-button-highlight border-b-win98-button-highlight;
+    box-shadow: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #808080;
+  }
+  
+  .win98-outset {
+    @apply border-2 border-win98-button-highlight border-r-win98-button-shadow border-b-win98-button-shadow;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  }
+  
+  .win98-title-bar {
+    @apply bg-win98-title-bar text-white px-2 py-1 text-sm font-bold;
+    background: linear-gradient(90deg, #008080 0%, #004040 100%);
+  }
+  
+  .win98-progress-bar {
+    @apply win98-inset bg-white;
+  }
+  
+  .win98-progress-fill {
+    @apply bg-win98-blue h-full;
+    background: repeating-linear-gradient(
+      45deg,
+      #0000ff,
+      #0000ff 2px,
+      #0080ff 2px,
+      #0080ff 4px
+    );
+  }
+}
+
+/* Windows 98 Scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px inset #c0c0c0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #dfdfdf;
+}
+
+::-webkit-scrollbar-corner {
+  background: #c0c0c0;
+}
+
+/* Custom slider styles for Windows 98 */
+.win98-slider {
+  -webkit-appearance: none;
   appearance: none;
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
-  border: 3px solid white;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  height: 20px;
+  background: #c0c0c0;
+  border: 2px inset #c0c0c0;
+  outline: none;
+}
+
+.win98-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 16px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  border-radius: 0;
 }
 
-.slider-thumb::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.6);
+.win98-slider::-webkit-slider-thumb:active {
+  border: 2px inset #c0c0c0;
 }
 
-.slider-thumb::-moz-range-thumb {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
-  border: 3px solid white;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+.win98-slider::-moz-range-thumb {
+  width: 20px;
+  height: 16px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
+  border-radius: 0;
 }
 
-.slider-thumb::-moz-range-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.6);
+/* Remove modern styling */
+.win98-slider::-webkit-slider-thumb:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Windows 98 Radio Button Style */
+.win98-radio {
+  @apply win98-inset bg-white w-4 h-4 rounded-full flex items-center justify-center;
+}
+
+.win98-radio.selected::after {
+  content: '';
+  @apply w-2 h-2 bg-win98-black rounded-full;
+}
+
+/* Windows 98 Text Input */
+.win98-input {
+  @apply win98-inset bg-white px-2 py-1 text-win98-black font-win98;
 }
 
 @media print {

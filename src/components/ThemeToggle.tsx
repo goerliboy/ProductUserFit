@@ -8,13 +8,14 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 transition-colors"
+      className="fixed top-4 right-4 win98-button flex items-center justify-center w-8 h-8"
       aria-label="Toggle theme"
+      title="Toggle theme (Windows 98 style)"
     >
       {theme === 'dark' ? (
-        <Sun size={20} className="text-yellow-400" />
+        <Sun size={16} className="text-win98-black" />
       ) : (
-        <Moon size={20} className="text-gray-700" />
+        <Moon size={16} className="text-win98-black" />
       )}
     </button>
   );
