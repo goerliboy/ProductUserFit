@@ -68,6 +68,12 @@
   }
 }
 
+@layer utilities {
+  .bg-win98-blue {
+    background-color: theme('colors.win98.blue');
+  }
+}
+
 /* Windows 98 Scrollbar */
 ::-webkit-scrollbar {
   width: 16px;
