@@ -72,9 +72,8 @@
   }
   
   .win98-gradient-text {
-    background: linear-gradient(90deg, #008080 0%, #20b2aa 50%, #008080 100%);
+    background: #454545;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 }
