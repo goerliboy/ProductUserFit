@@ -29,7 +29,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-win98-gray text-win98-black font-win98">
+      <div className="min-h-screen bg-background-light dark:bg-gradient-to-br dark:from-gray-900 dark:to-indigo-950 text-text-primary dark:text-white transition-colors duration-200">
         <AnalyzerProvider>
           <ThemeToggle />
           <div className="container mx-auto px-4 py-8 max-w-4xl">

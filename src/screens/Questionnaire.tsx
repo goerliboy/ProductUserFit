@@ -71,28 +71,24 @@ const Questionnaire: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-win98-black font-win98">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
           Diagnostic Questions
         </h1>
-        <p className="text-base text-win98-blue font-win98">
+        <p className="text-lg italic text-indigo-600 dark:text-indigo-300">
           Question {currentQuestionIndex + 1} of {totalQuestions}
         </p>
       </div>
 
       <div className="w-full max-w-3xl mb-4">
-        <div className="win98-progress-bar h-6">
+        <div className="w-full bg-gray-200 dark:bg-gray-700/30 h-2 rounded-full overflow-hidden">
           <div 
-            className="win98-progress-fill transition-all duration-500 ease-out"
+            className="h-full bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
       </div>
 
-      <div className="win98-window p-6 w-full max-w-3xl">
-        <div className="win98-title-bar mb-4 -mx-6 -mt-6">
-          <span>Question {currentQuestionIndex + 1} of {totalQuestions}</span>
-        </div>
-        
+      <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg w-full max-w-3xl">
         {currentQuestion && (
           <QuestionCard
             question={currentQuestion}
@@ -101,40 +97,40 @@ const Questionnaire: React.FC = () => {
           />
         )}
 
-        {error && <p className="mt-4 text-red-600 text-sm font-win98">{error}</p>}
+        {error && <p className="mt-4 text-red-500 dark:text-red-400 text-sm">{error}</p>}
 
         <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8">
           <button
             onClick={handlePrevious}
             disabled={isSubmitting}
-            className="win98-button flex items-center justify-center gap-2 text-sm"
+            className="flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-gray-100 dark:bg-gray-700/30 hover:bg-gray-200 dark:hover:bg-gray-600/40 text-gray-700 dark:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={18} />
             Previous
           </button>
           
           <button
             onClick={handleNext}
             disabled={isSubmitting}
-            className="win98-button flex items-center justify-center gap-2 text-sm font-bold px-6"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all duration-300 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLastQuestion ? (
               <>
                 {isSubmitting ? 'Calculating...' : 'Calculate Score'}
-                <Check size={16} />
+                <Check size={18} />
               </>
             ) : (
               <>
                 Next
-                <ArrowRight size={16} />
+                <ArrowRight size={18} />
               </>
             )}
           </button>
         </div>
       </div>
 
-      <div className="mt-6 text-center text-sm text-win98-gray-dark font-win98">
-        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold text-win98-blue hover:underline">@zeroXserdar</a>
+      <div className="mt-6 text-center text-lg text-gray-500 dark:text-gray-400">
+        vibe coded with sweat, teardrops and zero coding skills by <a href="https://x.com/zeroXserdar" target="_blank" className="font-bold hover:text-indigo-500 transition-colors">@zeroXserdar</a>
       </div>
     </div>
   );

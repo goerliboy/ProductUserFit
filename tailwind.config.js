@@ -5,55 +5,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Windows 98 color palette
-        win98: {
-          gray: '#c0c0c0',
-          'gray-light': '#dfdfdf',
-          'gray-dark': '#808080',
-          'gray-darker': '#404040',
-          blue: '#0000ff',
-          'blue-light': '#0080ff',
-          'blue-dark': '#000080',
-          black: '#000000',
-          white: '#ffffff',
-          'button-face': '#c0c0c0',
-          'button-shadow': '#808080',
-          'button-dark-shadow': '#404040',
-          'button-light': '#dfdfdf',
-          'button-highlight': '#ffffff',
-          'window-frame': '#c0c0c0',
-          'title-bar': '#008080',
-          'title-bar-inactive': '#808080',
-        },
         background: {
-          light: '#c0c0c0',
-          dark: '#c0c0c0'
+          light: '#f9fafb',
+          dark: '#111827'
         },
         card: {
-          light: '#c0c0c0',
-          dark: '#c0c0c0'
+          light: '#ffffff',
+          dark: '#1f2937'
         },
         text: {
-          primary: '#000000',
-          secondary: '#404040'
-        }
-      },
-      fontFamily: {
-        'win98': ['MS Sans Serif', 'Tahoma', 'Arial', 'sans-serif'],
-      },
-      boxShadow: {
-        'win98-inset': 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff',
-        'win98-outset': 'inset -1px -1px #808080, inset 1px 1px #ffffff, inset -2px -2px #404040, inset 2px 2px #dfdfdf',
-        'win98-pressed': 'inset -1px -1px #ffffff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #404040',
-        'win98-window': '2px 2px 4px rgba(0,0,0,0.3)',
-      },
-      animation: {
-        'win98-blink': 'blink 1s step-end infinite',
-      },
-      keyframes: {
-        blink: {
-          '0%, 50%': { opacity: '1' },
-          '51%, 100%': { opacity: '0' },
+          primary: '#374151',
+          secondary: '#6b7280'
+        },
+        indigo: {
+          light: '#e0e7ff',
+          DEFAULT: '#6366f1',
+          dark: '#4f46e5'
         }
       }
     },

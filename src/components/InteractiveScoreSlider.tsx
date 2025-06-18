@@ -35,31 +35,31 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
       return {
         level: "Mainstream Ready",
         description: "Anyone can use this product without crypto knowledge",
-        color: "text-win98-blue"
+        color: "text-green-600 dark:text-green-400"
       };
     } else if (score <= 4) {
       return {
         level: "Crypto Curious",
         description: "Basic crypto familiarity required",
-        color: "text-win98-blue"
+        color: "text-blue-600 dark:text-blue-400"
       };
     } else if (score <= 6) {
       return {
         level: "Crypto Experienced",
         description: "Moderate crypto expertise needed",
-        color: "text-win98-blue"
+        color: "text-yellow-600 dark:text-yellow-400"
       };
     } else if (score <= 8) {
       return {
         level: "Crypto Native",
         description: "Advanced crypto knowledge required",
-        color: "text-win98-blue"
+        color: "text-orange-600 dark:text-orange-400"
       };
     } else {
       return {
         level: "Crypto Expert",
         description: "Deep technical expertise essential",
-        color: "text-win98-blue"
+        color: "text-red-600 dark:text-red-400"
       };
     }
   };
@@ -71,36 +71,32 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
       {/* Header */}
       <div className="text-center">
         <div className="inline-flex items-center gap-3 mb-4">
-          <div className="win98-outset p-2 bg-win98-gray">
-            <Slider size={20} className="text-win98-black" />
+          <div className="p-2 rounded-lg bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/30 dark:to-indigo-900/30">
+            <Slider size={24} className="text-purple-600 dark:text-purple-400" />
           </div>
-          <h2 className="text-xl font-bold text-win98-black font-win98">Interactive Score Explorer</h2>
+          <h2 className="text-2xl font-bold text-text-primary dark:text-white">Interactive Score Explorer</h2>
         </div>
-        <p className="text-win98-gray-dark max-w-2xl mx-auto font-win98 text-sm">
+        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
           Use the slider to explore how the analysis changes for each score in real-time.
         </p>
       </div>
 
       {/* Score Slider */}
-      <div className="win98-window p-6">
-        <div className="win98-title-bar mb-4 -mx-6 -mt-6">
-          <span>Score Explorer</span>
-        </div>
-        
+      <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 backdrop-blur-sm shadow-lg border border-gray-100 dark:border-gray-700/50">
         <div className="space-y-6">
           {/* Current Score Display */}
           <div className="text-center">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 win98-inset bg-white ${isAnimating ? 'animate-pulse' : ''}`}>
-              <span className="text-xl font-bold text-win98-blue font-win98">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border border-purple-200 dark:border-purple-700/50 ${isAnimating ? 'scale-105' : ''} transition-transform duration-300`}>
+              <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                 {selectedScore.toFixed(1)}
               </span>
-              <span className="text-sm text-win98-gray-dark font-win98">/ 10</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">/ 10</span>
             </div>
             <div className="mt-2">
-              <span className={`text-base font-bold ${scoreInfo.color} font-win98`}>
+              <span className={`text-lg font-semibold ${scoreInfo.color}`}>
                 {scoreInfo.level}
               </span>
-              <p className="text-sm text-win98-gray-dark mt-1 font-win98">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                 {scoreInfo.description}
               </p>
             </div>
@@ -115,11 +111,19 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
               step="0.1"
               value={selectedScore}
               onChange={handleScoreChange}
-              className="win98-slider w-full"
+              className="w-full h-3 bg-gradient-to-r from-green-200 via-yellow-200 via-orange-200 to-red-200 dark:from-green-800 dark:via-yellow-800 dark:via-orange-800 dark:to-red-800 rounded-lg appearance-none cursor-pointer slider-thumb"
+              style={{
+                background: `linear-gradient(to right, 
+                  #10b981 0%, #10b981 20%, 
+                  #3b82f6 20%, #3b82f6 40%, 
+                  #eab308 40%, #eab308 60%, 
+                  #f97316 60%, #f97316 80%, 
+                  #ef4444 80%, #ef4444 100%)`
+              }}
             />
             
             {/* Score markers */}
-            <div className="flex justify-between mt-2 text-xs text-win98-gray-dark font-win98">
+            <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
               <span>1</span>
               <span>2</span>
               <span>3</span>
@@ -134,14 +138,14 @@ const InteractiveScoreSlider: React.FC<InteractiveScoreSliderProps> = ({
           </div>
 
           {/* Score Range Info */}
-          <div className="win98-inset bg-win98-gray-light p-4">
+          <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 p-4 rounded-lg border-l-4 border-purple-500">
             <div className="flex items-start gap-3">
-              <Info size={16} className="text-win98-blue flex-shrink-0 mt-0.5" />
+              <Info size={20} className="text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-win98-black mb-1 font-win98 text-sm">
+                <p className="font-medium text-purple-900 dark:text-purple-100 mb-1">
                   Score Range: {currentScoreRange}
                 </p>
-                <p className="text-xs text-win98-gray-dark font-win98">
+                <p className="text-sm text-purple-700 dark:text-purple-200">
                   Use the slider above to see how all analysis sections below change based on different complexity levels.
                 </p>
               </div>
