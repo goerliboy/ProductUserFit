@@ -25,10 +25,10 @@ If you’ve shipped features, launched campaigns, or revamped onboarding, only t
    - **Product Interpretation Summary**
    - **Category Radar Chart** — visual complexity mapping
    - **Ideal User Profile** – experience, expectations, and behavior
-   - **Onboarding Principles** – how to greet the right user the right way
-   - **Marketing Strategy** – what to say, where, and to whom
    - **Growth Tactics** – your product’s traction levers
-   - **Comparable Products** (coming soon)
+   - *Onboarding Principles [WIP]*
+   - *Marketing Strategy [WIP]*
+   - *Similar Products [WIP]*
 
 
 ## Why this matters
@@ -38,11 +38,9 @@ Product-User Fit is what happens before Product-Market Fit. It tells you:
 - What your user *needs to know* to make sense of it
 - How to align UX, onboarding, and GTM strategy to reduce confusion and increase adoption
 
-This isn’t guesswork. It’s structured clarity—delivered fast.
-
 ## Methodology: How the Framework Was Built
 
-To calibrate the **Product-User Fit Framework**, I conducted a UX, UI, and GTM audit of dozens of crypto products spanning a wide range of categories from the instantly intuitive to the “_what the hell is this even?_” tier.
+To calibrate the **Product-User Fit Framework**, I conducted an audit (UI,UX,GTM) crypto products from a wide range of categories from the instantly intuitive to the “_what the hell is this even?_” tier.
 
 Each product was assessed for:
 - Conceptual clarity
@@ -71,7 +69,7 @@ Based on this, I assigned a **Difficulty Score** (1–10) and categorized each p
 
 ## Use Cases
 
-- You’re preparing a **launch** and want to match messaging to user maturity
+- You’re preparing a **launch** and want to match messaging to user literacy
 - You’re seeing **low activation** or user confusion and don’t know why
 - You need to **train your team** on who the product is actually for
 - You’re crafting a **VC pitch** and want to show product-user alignment with data
